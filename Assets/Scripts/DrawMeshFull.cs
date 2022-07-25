@@ -26,18 +26,18 @@ public class DrawMeshFull : MonoBehaviour
     private void Update()
     {
         // Only run logic if not over UI
-        Vector3 mouseWorldPosition = Utilities.GetMouseWorldPosition();
+        Vector3 mouseWorldPosition = Utilities2.GetMouseWorldPosition();
         if (Input.GetMouseButtonDown(0))
         {
             // Mouse Down
             CreateMeshObject();
-            mesh = Utilities.CreateMesh(mouseWorldPosition, mouseWorldPosition, mouseWorldPosition, mouseWorldPosition);
+            mesh = Utilities2.CreateMesh(mouseWorldPosition, mouseWorldPosition, mouseWorldPosition, mouseWorldPosition);
             mesh.MarkDynamic();
             lastGameObject.GetComponent<MeshFilter>().mesh = mesh;
             Material material = new Material(drawMeshMaterial);
             material.color = lineColor;
             lastGameObject.GetComponent<MeshRenderer>().material = material;
-            Utilities.AddLinePoint(mesh, mouseWorldPosition, lineThickness);
+            Utilities2.AddLinePoint(mesh, mouseWorldPosition, lineThickness);
         }
 
         if (Input.GetMouseButton(0))
@@ -46,19 +46,19 @@ public class DrawMeshFull : MonoBehaviour
             float minDistance = .1f;
             if (Vector2.Distance(lastMouseWorldPosition, mouseWorldPosition) > minDistance)
             {
-                // Far enough from last point
+                //Far enough from last point
                 Vector2 forwardVector = (mouseWorldPosition - lastMouseWorldPosition).normalized;
 
                 lastMouseWorldPosition = mouseWorldPosition;
 
-                Utilities.AddLinePoint(mesh, mouseWorldPosition, lineThickness);
+                Utilities2.AddLinePoint(mesh, mouseWorldPosition, lineThickness);
             }
         }
 
         if (Input.GetMouseButtonUp(0))
         {
             // Mouse Up
-            Utilities.AddLinePoint(mesh, mouseWorldPosition, lineThickness);
+            Utilities2.AddLinePoint(mesh, mouseWorldPosition, lineThickness);
         }
     }
 

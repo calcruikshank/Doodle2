@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Utilities : MonoBehaviour
+public class Utilities2 : MonoBehaviour
 {
-    public static Utilities singleton;
+    public static Utilities2 singleton;
     private static readonly Vector3 Vector3zero = Vector3.zero;
     private static readonly Vector3 Vector3one = Vector3.one;
     private static readonly Vector3 Vector3yDown = new Vector3(0, -1);
