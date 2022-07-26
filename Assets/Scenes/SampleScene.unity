@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 417067793}
   - component: {fileID: 417067794}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Contour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameboard: {fileID: 823945447}
+  drawMeshMaterial: {fileID: 10756, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
