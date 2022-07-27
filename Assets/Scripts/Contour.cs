@@ -94,7 +94,7 @@ namespace Gameboard
                     int[] triangleIndeces = triangulator.Triangulate();
 
                     Mesh mesh = new Mesh();
-
+                    mesh.MarkDynamic();
                     mesh.vertices = verticesToApply;
                     mesh.uv = uvsToApply;
                     mesh.triangles = triangleIndeces;
