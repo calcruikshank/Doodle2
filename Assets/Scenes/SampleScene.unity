@@ -169,6 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameboard: {fileID: 823945447}
   drawMeshMaterial: {fileID: 10756, guid: 0000000000000000e000000000000000, type: 0}
+  transformWithTrail: {fileID: 571977410370792373, guid: 2c41de995d3811a4db34535c97b37786, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
