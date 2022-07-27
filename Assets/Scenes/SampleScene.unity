@@ -170,6 +170,7 @@ MonoBehaviour:
   gameboard: {fileID: 823945447}
   drawMeshMaterial: {fileID: 2100000, guid: 8ed5bdd6fb43ae84894037acaf811013, type: 2}
   transformWithTrail: {fileID: 571977410370792373, guid: 2c41de995d3811a4db34535c97b37786, type: 3}
+  emptyT: {fileID: 2851443791524875943, guid: 54b17a0935469c343aab67621bd5a809, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +206,7 @@ Camera:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 4
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2

@@ -39,32 +39,35 @@ namespace Gameboard
             singleton = this;
         }
         Vector3 offset = new Vector3();
+        [SerializeField] Transform emptyT;
         private void BoardObjectsUpdated(object sender, List<TrackedBoardObject> updatedList)
         {
 
             foreach (TrackedBoardObject newBoardObject in updatedList)
             {
-                if (!testObjectDict.ContainsKey(newBoardObject.sessionId))
+                if (!gameObjectDictionary.ContainsKey(newBoardObject.sessionId))
                 {
 
-                    offset = newBoardObject.sceneWorldPosition;
-                    lastGameObject = new GameObject("DrawMeshSingle", typeof(MeshFilter), typeof(MeshRenderer));
+                    /*offset = newBoardObject.sceneWorldPosition;
                     lastSortingOrder++;
                     lastGameObject.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
                     lastGameObject.transform.position = new Vector3(newBoardObject.sceneWorldPosition.x, newBoardObject.sceneWorldPosition.y, 1);
                     gameObjectOnTouch = new GameObject("DrawMeshSingle", typeof(MeshFilter), typeof(MeshRenderer));
-                    gameObjectOnTouch.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
+                    gameObjectOnTouch.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;*/
                     //tr = Instantiate(transformWithTrail, lastGameObject.transform.position, Quaternion.identity).GetComponent<TrailRenderer>();
                     //tr.sortingLayerID = lastSortingOrder;
                     //tr.transform.localScale = new Vector3 ((newBoardObject.contourWorldVectors3D[0] - newBoardObject.contourWorldVectors3D[newBoardObject.contourWorldVectors3D.Length - 1]).magnitude, (newBoardObject.contourWorldVectors3D[0] - newBoardObject.contourWorldVectors3D[newBoardObject.contourWorldVectors3D.Length - 1]).magnitude, (newBoardObject.contourWorldVectors3D[0] - newBoardObject.contourWorldVectors3D[newBoardObject.contourWorldVectors3D.Length - 1]).magnitude);
+
+                    lastGameObject = Instantiate(emptyT.gameObject, newBoardObject.sceneWorldPosition, Quaternion.identity);
                     TrailRenderer tr = lastGameObject.AddComponent<TrailRenderer>();
-                    drawMeshMaterial.SetColor("_Color", lineColor);
-                    drawMeshMaterial.color = lineColor;
                     tr.material = drawMeshMaterial;
                     tr.time = Mathf.Infinity;
+                    drawMeshMaterial.color = lineColor;
+                    tr.numCapVertices = 90;
+                    tr.numCornerVertices = 90;
                     Vector3[] verticesToApply = newBoardObject.contourWorldVectors3D;
 
-                    Vector2[] uvsToApply = new Vector2[verticesToApply.Length];
+                    /*Vector2[] uvsToApply = new Vector2[verticesToApply.Length];
 
                     Vector2[] vertsToTriangulate = new Vector2[verticesToApply.Length];
 
@@ -74,8 +77,9 @@ namespace Gameboard
                         verticesToApply[i] = new Vector3(verticesToApply[i].x - offset.x, verticesToApply[i].y - offset.y, 1);
                         vertsToTriangulate[i] = (Vector2)verticesToApply[i];
                         allVectorsToAdd.Add(verticesToApply[i]);
-                    }
+                    }*/
 
+                    float greatestDistanceBetweenTwoPoints = 0;
                     for (int i = 0; i < verticesToApply.Length; i++)
                     {
                         for (int j = 1; j < verticesToApply.Length; j++)
@@ -88,29 +92,29 @@ namespace Gameboard
                         }
                     }
                     tr.startWidth = greatestDistanceBetweenTwoPoints;
-                    Triangulator triangulator = new Triangulator(vertsToTriangulate);
+                    //Triangulator triangulator = new Triangulator(vertsToTriangulate);
 
 
-                    int[] triangleIndeces = triangulator.Triangulate();
+                    //int[] triangleIndeces = triangulator.Triangulate();
 
-                    Mesh mesh = new Mesh();
-                    mesh.MarkDynamic();
-                    mesh.vertices = verticesToApply;
-                    mesh.uv = uvsToApply;
-                    mesh.triangles = triangleIndeces;
+                    //Mesh mesh = new Mesh();
+                    //mesh.MarkDynamic();
+                    //mesh.vertices = verticesToApply;
+                    //mesh.uv = uvsToApply;
+                    //mesh.triangles = triangleIndeces;
 
-                    lastGameObject.GetComponent<MeshFilter>().mesh = mesh;
+                    /*lastGameObject.GetComponent<MeshFilter>().mesh = mesh;
                     lastGameObject.GetComponent<MeshRenderer>().material = drawMeshMaterial;
                     testObjectDict.Add(newBoardObject.sessionId, mesh);
-                    gameObjectDictionary.Add(newBoardObject.sessionId, lastGameObject) ;
                     trailRenderDictionary.Add(newBoardObject.sessionId, tr);
                     gameObjectOnTouch.GetComponent<MeshFilter>().mesh = mesh;
                     gameObjectOnTouch.GetComponent<MeshRenderer>().material = drawMeshMaterial;
                     gameObjectOnTouch.transform.position = new Vector3(newBoardObject.sceneWorldPosition.x, newBoardObject.sceneWorldPosition.y, 1);
-                    trDictionary.Add(newBoardObject.sessionId, tr);
+                    trDictionary.Add(newBoardObject.sessionId, tr);*/
+                    gameObjectDictionary.Add(newBoardObject.sessionId, lastGameObject);
                 }
 
-                if (testObjectDict.ContainsKey(newBoardObject.sessionId))
+                if (gameObjectDictionary.ContainsKey(newBoardObject.sessionId))
                 {
                     float minDistance = .1f;
                     if (Vector2.Distance(lastPosition, newBoardObject.sceneWorldPosition) > minDistance)
@@ -119,7 +123,6 @@ namespace Gameboard
                         Vector2 forwardVector = (newBoardObject.sceneWorldPosition - lastPosition).normalized;
                         if (lastPosition != Vector3.zero)
                         {
-                            trailRenderDictionary[newBoardObject.sessionId].numCapVertices = 90;
                         }
                         lastPosition = newBoardObject.sceneWorldPosition;
 
@@ -128,6 +131,8 @@ namespace Gameboard
 
                     GameObject correspondingObject = gameObjectDictionary[newBoardObject.sessionId];
                     correspondingObject.transform.position = new Vector3(newBoardObject.sceneWorldPosition.x, newBoardObject.sceneWorldPosition.y, 1);
+                    //Vector3.MoveTowards(correspondingObject.transform.position, new Vector3(newBoardObject.sceneWorldPosition.x, newBoardObject.sceneWorldPosition.y, 1), 100 * Time.deltaTime);
+                    //new Vector3(newBoardObject.sceneWorldPosition.x, newBoardObject.sceneWorldPosition.y, 1);
                     /*Mesh correspondingMesh = testObjectDict[newBoardObject.sessionId];
                     Vector3[] verticesToApply = newBoardObject.contourWorldVectors3D;
                     Vector2[] uvsToApply = new Vector2[verticesToApply.Length];
