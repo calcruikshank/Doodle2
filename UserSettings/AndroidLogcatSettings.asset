@@ -1,9 +1,9 @@
 {
     "m_SelectedDeviceId": "10.1.10.9:5555",
     "m_SelectedPackage": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
+        "deviceId": "10.1.10.9:5555",
+        "name": "com.DefaultCompany.Doodle2",
+        "processId": 5635,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -12,6 +12,48 @@
             "deviceId": "10.1.10.9:5555",
             "name": "com.lastgameboard.gameboardlauncher",
             "processId": 4532,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 4634,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 4845,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 5005,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 5157,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 5304,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 5484,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 5635,
             "exited": false
         }
     ],

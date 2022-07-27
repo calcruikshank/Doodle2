@@ -38,7 +38,6 @@ namespace Gameboard
 
         private void BoardObjectsUpdated(object sender, List<TrackedBoardObject> updatedList)
         {
-            float minDistance = .1f;
 
             foreach (TrackedBoardObject newBoardObject in updatedList)
             {
@@ -80,36 +79,45 @@ namespace Gameboard
 
                 if (testObjectDict.ContainsKey(newBoardObject.sessionId))
                 {
-                    lastGameObject = new GameObject("DrawMeshSingle", typeof(MeshFilter), typeof(MeshRenderer));
-                    lastSortingOrder++;
-                    lastGameObject.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
-
-                    Vector3[] verticesToApply = newBoardObject.contourWorldVectors3D;
-                    Vector2[] uvsToApply = new Vector2[verticesToApply.Length];
-                    Vector2[] vertsToTriangulate = new Vector2[verticesToApply.Length];
-                    for (int i = 0; i < verticesToApply.Length; i++)
+                    float minDistance = 1f;
+                    if (Vector2.Distance(lastPosition, newBoardObject.sceneWorldPosition) > minDistance)
                     {
-                        verticesToApply[i] = new Vector3(verticesToApply[i].x, verticesToApply[i].y, 1);
-                        vertsToTriangulate[i] = (Vector2)verticesToApply[i];
-                        allVectorsToAdd.Add(verticesToApply[i]);
+                        // Far enough from last point
+                        Vector2 forwardVector = (newBoardObject.sceneWorldPosition - lastPosition).normalized;
+
+                        lastPosition = newBoardObject.sceneWorldPosition;
+                        lastGameObject = new GameObject("DrawMeshSingle", typeof(MeshFilter), typeof(MeshRenderer));
+                        lastSortingOrder++;
+                        lastGameObject.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
+
+                        Vector3[] verticesToApply = newBoardObject.contourWorldVectors3D;
+                        Vector2[] uvsToApply = new Vector2[verticesToApply.Length];
+                        Vector2[] vertsToTriangulate = new Vector2[verticesToApply.Length];
+                        for (int i = 0; i < verticesToApply.Length; i++)
+                        {
+                            verticesToApply[i] = new Vector3(verticesToApply[i].x, verticesToApply[i].y, 1);
+                            vertsToTriangulate[i] = (Vector2)verticesToApply[i];
+                            allVectorsToAdd.Add(verticesToApply[i]);
+                        }
+
+                        Triangulator triangulator = new Triangulator(vertsToTriangulate);
+
+
+                        int[] triangleIndeces = triangulator.Triangulate();
+
+
+                        Mesh correspondingMesh = new Mesh();
+                        correspondingMesh.vertices = verticesToApply;
+                        correspondingMesh.uv = uvsToApply;
+                        correspondingMesh.triangles = triangleIndeces;
+                        correspondingMesh.vertices = verticesToApply;
+                        correspondingMesh.uv = uvsToApply;
+                        correspondingMesh.triangles = triangleIndeces;
+
+                        lastGameObject.GetComponent<MeshFilter>().mesh = correspondingMesh;
+                        lastGameObject.GetComponent<MeshRenderer>().material = drawMeshMaterial;
                     }
-
-                    Triangulator triangulator = new Triangulator(vertsToTriangulate);
-
-
-                    int[] triangleIndeces = triangulator.Triangulate();
-
-
-                    Mesh correspondingMesh = new Mesh();
-                    correspondingMesh.vertices = verticesToApply;
-                    correspondingMesh.uv = uvsToApply;
-                    correspondingMesh.triangles = triangleIndeces;
-                    correspondingMesh.vertices = verticesToApply;
-                    correspondingMesh.uv = uvsToApply;
-                    correspondingMesh.triangles = triangleIndeces;
-
-                    lastGameObject.GetComponent<MeshFilter>().mesh = correspondingMesh;
-                    lastGameObject.GetComponent<MeshRenderer>().material = drawMeshMaterial;
+                    
                 }
             }
         }
