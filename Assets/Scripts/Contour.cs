@@ -22,8 +22,10 @@ namespace Gameboard
 
         public Dictionary<uint, TrailRenderer> trDictionary = new Dictionary<uint, TrailRenderer>();
         List<Vector3> allVectorsToAdd = new List<Vector3>();
-       [SerializeField] Transform transformWithTrail;
+        [SerializeField] Transform transformWithTrail;
 
+        public Dictionary<uint, GameObject> gameObjectDictionary = new Dictionary<uint, GameObject>();
+        public Dictionary<uint, TrailRenderer> trailRenderDictionary = new Dictionary<uint, TrailRenderer>();
         IEnumerator Start()
         {
             while (gameboard.boardTouchController == null || gameboard.boardTouchController.boardTouchHandler == null)
@@ -39,7 +41,6 @@ namespace Gameboard
         Vector3 offset = new Vector3();
         private void BoardObjectsUpdated(object sender, List<TrackedBoardObject> updatedList)
         {
-            float minDistance = .1f;
 
             foreach (TrackedBoardObject newBoardObject in updatedList)
             {
@@ -50,6 +51,7 @@ namespace Gameboard
                     lastGameObject = new GameObject("DrawMeshSingle", typeof(MeshFilter), typeof(MeshRenderer));
                     lastSortingOrder++;
                     lastGameObject.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
+                    lastGameObject.transform.position = new Vector3(newBoardObject.sceneWorldPosition.x, newBoardObject.sceneWorldPosition.y, 1);
                     gameObjectOnTouch = new GameObject("DrawMeshSingle", typeof(MeshFilter), typeof(MeshRenderer));
                     gameObjectOnTouch.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
                     //tr = Instantiate(transformWithTrail, lastGameObject.transform.position, Quaternion.identity).GetComponent<TrailRenderer>();
@@ -100,6 +102,8 @@ namespace Gameboard
                     lastGameObject.GetComponent<MeshFilter>().mesh = mesh;
                     lastGameObject.GetComponent<MeshRenderer>().material = drawMeshMaterial;
                     testObjectDict.Add(newBoardObject.sessionId, mesh);
+                    gameObjectDictionary.Add(newBoardObject.sessionId, lastGameObject) ;
+                    trailRenderDictionary.Add(newBoardObject.sessionId, tr);
                     gameObjectOnTouch.GetComponent<MeshFilter>().mesh = mesh;
                     gameObjectOnTouch.GetComponent<MeshRenderer>().material = drawMeshMaterial;
                     gameObjectOnTouch.transform.position = new Vector3(newBoardObject.sceneWorldPosition.x, newBoardObject.sceneWorldPosition.y, 1);
@@ -108,8 +112,22 @@ namespace Gameboard
 
                 if (testObjectDict.ContainsKey(newBoardObject.sessionId))
                 {
-                    lastGameObject.transform.position = new Vector3(newBoardObject.sceneWorldPosition.x, newBoardObject.sceneWorldPosition.y, 1);
+                    float minDistance = .1f;
+                    if (Vector2.Distance(lastPosition, newBoardObject.sceneWorldPosition) > minDistance)
+                    {
+                        //Far enough from last point
+                        Vector2 forwardVector = (newBoardObject.sceneWorldPosition - lastPosition).normalized;
+                        if (lastPosition != Vector3.zero)
+                        {
+                            trailRenderDictionary[newBoardObject.sessionId].numCapVertices = 90;
+                        }
+                        lastPosition = newBoardObject.sceneWorldPosition;
 
+                        
+                    }
+
+                    GameObject correspondingObject = gameObjectDictionary[newBoardObject.sessionId];
+                    correspondingObject.transform.position = new Vector3(newBoardObject.sceneWorldPosition.x, newBoardObject.sceneWorldPosition.y, 1);
                     /*Mesh correspondingMesh = testObjectDict[newBoardObject.sessionId];
                     Vector3[] verticesToApply = newBoardObject.contourWorldVectors3D;
                     Vector2[] uvsToApply = new Vector2[verticesToApply.Length];
