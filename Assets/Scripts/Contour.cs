@@ -20,6 +20,7 @@ namespace Gameboard
         public Dictionary<uint, Mesh> testObjectDict = new Dictionary<uint, Mesh>();
         private Vector3 lastPosition;
 
+        public Dictionary<uint, TrailRenderer> trDictionary = new Dictionary<uint, TrailRenderer>();
         List<Vector3> allVectorsToAdd = new List<Vector3>();
        [SerializeField] Transform transformWithTrail;
 
@@ -55,7 +56,10 @@ namespace Gameboard
                     //tr.sortingLayerID = lastSortingOrder;
                     //tr.transform.localScale = new Vector3 ((newBoardObject.contourWorldVectors3D[0] - newBoardObject.contourWorldVectors3D[newBoardObject.contourWorldVectors3D.Length - 1]).magnitude, (newBoardObject.contourWorldVectors3D[0] - newBoardObject.contourWorldVectors3D[newBoardObject.contourWorldVectors3D.Length - 1]).magnitude, (newBoardObject.contourWorldVectors3D[0] - newBoardObject.contourWorldVectors3D[newBoardObject.contourWorldVectors3D.Length - 1]).magnitude);
                     TrailRenderer tr = lastGameObject.AddComponent<TrailRenderer>();
-                    
+                    drawMeshMaterial.SetColor("_Color", lineColor);
+                    drawMeshMaterial.color = lineColor;
+                    tr.material = drawMeshMaterial;
+                    tr.time = Mathf.Infinity;
                     Vector3[] verticesToApply = newBoardObject.contourWorldVectors3D;
 
                     Vector2[] uvsToApply = new Vector2[verticesToApply.Length];
@@ -98,7 +102,8 @@ namespace Gameboard
                     testObjectDict.Add(newBoardObject.sessionId, mesh);
                     gameObjectOnTouch.GetComponent<MeshFilter>().mesh = mesh;
                     gameObjectOnTouch.GetComponent<MeshRenderer>().material = drawMeshMaterial;
-
+                    gameObjectOnTouch.transform.position = new Vector3(newBoardObject.sceneWorldPosition.x, newBoardObject.sceneWorldPosition.y, 1);
+                    trDictionary.Add(newBoardObject.sessionId, tr);
                 }
 
                 if (testObjectDict.ContainsKey(newBoardObject.sessionId))
@@ -147,34 +152,14 @@ namespace Gameboard
         //Mesh correspondingMesh;
         private void BoardObjectSessionsDeleted(object sender, List<uint> e)
         {
-            /*foreach (uint id in e)
+            
+            foreach (uint id in e)
             {
                 if (testObjectDict.ContainsKey(id))
                 {
-
-                    Vector3[] verticesToApply = allVectorsToAdd.ToArray();
-                    Vector2[] uvsToApply = new Vector2[allVectorsToAdd.Count];
-                    Vector2[] vertsToTriangulate = new Vector2[verticesToApply.Length];
-                    for (int i = 0; i < verticesToApply.Length; i++)
-                    {
-                        verticesToApply[i] = new Vector3(verticesToApply[i].x, verticesToApply[i].y, 1);
-
-
-                        vertsToTriangulate[i] = (Vector2)verticesToApply[i];
-                    }
-                    Triangulator triangulator = new Triangulator(vertsToTriangulate);
-
-
-                    int[] triangleIndeces = triangulator.Triangulate();
-                    if (correspondingMesh != null)
-                    {
-                        correspondingMesh.vertices = verticesToApply;
-                        correspondingMesh.uv = uvsToApply;
-                        correspondingMesh.triangles = triangleIndeces;
-                    }
-                    allVectorsToAdd.Clear();
+                   //trDictionary[id].BakeMesh(testObjectDict[id]);
                 }
-            }*/
+            }
 
         }
 
