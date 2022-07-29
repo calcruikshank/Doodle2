@@ -107,7 +107,7 @@ namespace Gameboard
                     if (Vector2.Distance(lastPosition, newBoardObject.sceneWorldPosition) > minDistance)
                     {
                         // Far enough from last point
-                        Vector2 forwardVector = (newBoardObject.sceneWorldPosition - lastPosition).normalized;
+                        Vector2 forwardVector = (newBoardObject.sceneWorldPosition - lastPosition);
 
                         lastPosition = newBoardObject.sceneWorldPosition;
 
@@ -183,8 +183,10 @@ namespace Gameboard
             {
                 for (int j = 0; j < newBoardObjectInfo.pointsInTheContour[i].Count; j++)
                 {
-                    AllVerts.Add(new Vector3(newBoardObjectInfo.pointsInTheContour[i][j].x - newBoardObjectInfo.sceneObjectPositions[i].x + offset.x, newBoardObjectInfo.pointsInTheContour[i][j].y - newBoardObjectInfo.sceneObjectPositions[i].y + offset.y, 1));
-                    pointsToTriangulate.Add(new Vector3(newBoardObjectInfo.pointsInTheContour[i][j].x - offset.x, newBoardObjectInfo.pointsInTheContour[i][j].y - offset.y, 1));
+                    //AllVerts.Add(new Vector3(newBoardObjectInfo.pointsInTheContour[i][j].x - newBoardObjectInfo.sceneObjectPositions[i].x + offset.x, newBoardObjectInfo.pointsInTheContour[i][j].y - newBoardObjectInfo.sceneObjectPositions[i].y + offset.y, 1));
+                    AllVerts.Add(new Vector3(newBoardObjectInfo.pointsInTheContour[i][j].x, newBoardObjectInfo.pointsInTheContour[i][j].y, 1));
+                    //pointsToTriangulate.Add(new Vector3(newBoardObjectInfo.pointsInTheContour[i][j].x - newBoardObjectInfo.sceneObjectPositions[i].x + offset.x, newBoardObjectInfo.pointsInTheContour[i][j].y - newBoardObjectInfo.sceneObjectPositions[i].y + offset.y, 1));
+                    pointsToTriangulate.Add(new Vector3(newBoardObjectInfo.pointsInTheContour[i][j].x, newBoardObjectInfo.pointsInTheContour[i][j].y, 1));
                 }
             }
             Vector2[] pointsToTriangulateAfterSort = pointsToTriangulate.ToArray<Vector2>();
