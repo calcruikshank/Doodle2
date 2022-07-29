@@ -24,7 +24,10 @@ namespace Gameboard
         public Dictionary<uint, GameObject> gameObjectDict = new Dictionary<uint, GameObject>();
 
         float colorTimerThresh = 5f;
-        float colorTimer= 0f;
+        float colorTimer= 6f;
+
+        Vector3 offset;
+        List<Vector3> vector3sToMoveTowards = new List<Vector3>();
         IEnumerator Start()
         {
             while (gameboard.boardTouchController == null || gameboard.boardTouchController.boardTouchHandler == null)
@@ -55,8 +58,9 @@ namespace Gameboard
             {
                 if (!testObjectDict.ContainsKey(newBoardObject.sessionId))
                 {
-
+                    offset = newBoardObject.sceneWorldPosition;
                     lastGameObject = new GameObject("DrawMeshSingle", typeof(MeshFilter), typeof(MeshRenderer));
+                    lastGameObject.transform.position = newBoardObject.sceneWorldPosition;
                     lastSortingOrder++;
                     lastGameObject.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
 
@@ -67,9 +71,10 @@ namespace Gameboard
                     Vector2[] vertsToTriangulate = new Vector2[verticesToApply.Length];
                     for (int i = 0; i < verticesToApply.Length; i++)
                     {
-                        verticesToApply[i] = new Vector3(verticesToApply[i].x, verticesToApply[i].y, 1);
+                        verticesToApply[i] = new Vector3(verticesToApply[i].x - offset.x, verticesToApply[i].y - offset.y, 1);
                         vertsToTriangulate[i] = (Vector2)verticesToApply[i];
-                        allVectorsToAdd.Add(verticesToApply[i]);
+                        /*verticesToApply[i] = new Vector3(0, 0, 1);
+                        vertsToTriangulate[i] = (Vector2)verticesToApply[i];*/
                     }
 
                     Triangulator triangulator = new Triangulator(vertsToTriangulate);
@@ -95,44 +100,47 @@ namespace Gameboard
                     float minDistance = .1f;
                     if (Vector2.Distance(lastPosition, newBoardObject.sceneWorldPosition) > minDistance)
                     {
-                       
+                        // Far enough from last point
+                        Vector2 forwardVector = (newBoardObject.sceneWorldPosition - lastPosition).normalized;
+
+                        /*lastPosition = newBoardObject.sceneWorldPosition;
+                        lastGameObject = new GameObject("DrawMeshSingle", typeof(MeshFilter), typeof(MeshRenderer));
+                        lastSortingOrder++;
+                        lastGameObject.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;*/
+
+                        Vector3[] verticesToApply = newBoardObject.contourWorldVectors3D;
+                        Vector2[] uvsToApply = new Vector2[verticesToApply.Length];
+                        Vector2[] vertsToTriangulate = new Vector2[verticesToApply.Length];
+                        for (int i = 0; i < verticesToApply.Length; i++)
+                        {
+                            verticesToApply[i] = new Vector3(verticesToApply[i].x - offset.x, verticesToApply[i].y - offset.y, 1);
+                            vertsToTriangulate[i] = (Vector2)verticesToApply[i];
+                            /*verticesToApply[i] = new Vector3(0, 0, 1);
+                            vertsToTriangulate[i] = (Vector2)verticesToApply[i];*/
+                            allVectorsToAdd.Add(verticesToApply[i]);
+                        }
+
+                        Triangulator triangulator = new Triangulator(vertsToTriangulate);
+
+
+                        int[] triangleIndeces = triangulator.Triangulate();
+
+
+                        Mesh correspondingMesh = testObjectDict[newBoardObject.sessionId];
+                        correspondingMesh.vertices = verticesToApply;
+                        correspondingMesh.uv = uvsToApply;
+                        correspondingMesh.triangles = triangleIndeces;
+
+                        GameObject correspondingObject = gameObjectDict[newBoardObject.sessionId];
+                        correspondingObject.transform.position = newBoardObject.sceneWorldPosition;
+                        correspondingObject.GetComponent<MeshFilter>().mesh = correspondingMesh;
+                        correspondingObject.GetComponent<MeshRenderer>().material = new Material(drawMeshMaterial);
+                        correspondingObject.GetComponent<MeshRenderer>().material.color = lineColor;
+
+                        correspondingObject.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
+
                     }
 
-                    // Far enough from last point
-                    Vector2 forwardVector = (newBoardObject.sceneWorldPosition - lastPosition).normalized;
-
-                    /*lastPosition = newBoardObject.sceneWorldPosition;
-                    lastGameObject = new GameObject("DrawMeshSingle", typeof(MeshFilter), typeof(MeshRenderer));
-                    lastSortingOrder++;
-                    lastGameObject.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;*/
-
-                    Vector3[] verticesToApply = newBoardObject.contourWorldVectors3D;
-                    Vector2[] uvsToApply = new Vector2[verticesToApply.Length];
-                    Vector2[] vertsToTriangulate = new Vector2[verticesToApply.Length];
-                    for (int i = 0; i < verticesToApply.Length; i++)
-                    {
-                        verticesToApply[i] = new Vector3(verticesToApply[i].x, verticesToApply[i].y, 1);
-                        vertsToTriangulate[i] = (Vector2)verticesToApply[i];
-                        allVectorsToAdd.Add(verticesToApply[i]);
-                    }
-
-                    Triangulator triangulator = new Triangulator(vertsToTriangulate);
-
-
-                    int[] triangleIndeces = triangulator.Triangulate();
-
-
-                    Mesh correspondingMesh = testObjectDict[newBoardObject.sessionId];
-                    correspondingMesh.vertices = verticesToApply;
-                    correspondingMesh.uv = uvsToApply;
-                    correspondingMesh.triangles = triangleIndeces;
-
-                    GameObject correspondingObject = gameObjectDict[newBoardObject.sessionId];
-                    correspondingObject.GetComponent<MeshFilter>().mesh = correspondingMesh;
-                    correspondingObject.GetComponent<MeshRenderer>().material = new Material(drawMeshMaterial);
-                    correspondingObject.GetComponent<MeshRenderer>().material.color = lineColor;
-
-                    correspondingObject.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
                 }
             }
         }
