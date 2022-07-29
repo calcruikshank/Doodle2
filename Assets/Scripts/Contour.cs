@@ -183,9 +183,9 @@ namespace Gameboard
             {
                 for (int j = 0; j < newBoardObjectInfo.pointsInTheContour[i].Count; j++)
                 {
-                    //AllVerts.Add(new Vector3(newBoardObjectInfo.pointsInTheContour[i][j].x - newBoardObjectInfo.sceneObjectPositions[i].x + offset.x, newBoardObjectInfo.pointsInTheContour[i][j].y - newBoardObjectInfo.sceneObjectPositions[i].y + offset.y, 1));
+                    AllVerts.Add(new Vector3(newBoardObjectInfo.pointsInTheContour[i][j].x - newBoardObjectInfo.sceneObjectPositions[i].x + offset.x, newBoardObjectInfo.pointsInTheContour[i][j].y - newBoardObjectInfo.sceneObjectPositions[i].y + offset.y, 1));
                     AllVerts.Add(new Vector3(newBoardObjectInfo.pointsInTheContour[i][j].x, newBoardObjectInfo.pointsInTheContour[i][j].y, 1));
-                    //pointsToTriangulate.Add(new Vector3(newBoardObjectInfo.pointsInTheContour[i][j].x - newBoardObjectInfo.sceneObjectPositions[i].x + offset.x, newBoardObjectInfo.pointsInTheContour[i][j].y - newBoardObjectInfo.sceneObjectPositions[i].y + offset.y, 1));
+                    pointsToTriangulate.Add(new Vector3(newBoardObjectInfo.pointsInTheContour[i][j].x - newBoardObjectInfo.sceneObjectPositions[i].x + offset.x, newBoardObjectInfo.pointsInTheContour[i][j].y - newBoardObjectInfo.sceneObjectPositions[i].y + offset.y, 1));
                     pointsToTriangulate.Add(new Vector3(newBoardObjectInfo.pointsInTheContour[i][j].x, newBoardObjectInfo.pointsInTheContour[i][j].y, 1));
                 }
             }
