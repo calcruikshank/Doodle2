@@ -23,7 +23,12 @@ public class NewBoardObjectInfo
 
     public void AddToSceneObjectPositions(Vector3 positionSent, List<Vector3> pointsInTheContourSent)
     {
+        
         pointsInTheContour.Add(pointsInTheContourSent);
-        sceneObjectPositions.Add(new Vector3(positionSent.x, positionSent.y, 1));
+        sceneObjectPositions.Add(new Vector3(positionSent.x, positionSent.y, 1)); 
+        for (int i = 0; i < pointsInTheContourSent.Count; i++)
+        {
+            //Debug.LogError(i + " point in contour " + pointsInTheContourSent[i]);
+        }
     }
 }
