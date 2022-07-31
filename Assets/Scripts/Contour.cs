@@ -192,22 +192,22 @@ namespace Gameboard
 
             pointsToTriangulate = JarvisMarchAlgorithm.GetConvexHull(pointsToTriangulate);
 
-            pointsToTriangulate.Sort(new ClockWiseComparer(offset));
+            //pointsToTriangulate.Sort(new ClockWiseComparer(offset));
             //adds first point again
             pointsToTriangulate.Add(pointsToTriangulate[0]);
             for (int y = 0; y < pointsToTriangulate.Count; y++)
             {
-                AllVerts.Add(new Vector3( pointsToTriangulate[y].x, pointsToTriangulate[y].y) );
+                AllVerts.Add(new Vector3( pointsToTriangulate[y].x, pointsToTriangulate[y].y));
             }
             for (int x = 0; x < pointsToTriangulate.Count - 1; x++)
             {
-                Debug.DrawLine(pointsToTriangulate[x], pointsToTriangulate[x + 1], Color.white, 1000);
+                //Debug.DrawLine(pointsToTriangulate[x], pointsToTriangulate[x + 1], Color.white, 1000);
 
                 //Debug.LogError("Point to triangulate " + pointsToTriangulate[x] + " count " + pointsToTriangulate.Count + " " + x);
             }
 
             Vector2[] pointsToTriangulateAfterSort = pointsToTriangulate.ToArray<Vector2>();
-            Vector2[] uvsToApply = new Vector2[AllVerts.Count];
+            //Vector2[] uvsToApply = new Vector2[AllVerts.Count];
             Triangulator triangulator = new Triangulator(pointsToTriangulateAfterSort); 
             int[] triangleIndeces = triangulator.Triangulate();
 
@@ -215,7 +215,7 @@ namespace Gameboard
 
             Mesh correspondingMeshBetweenPoints = newBoardObjectInfo.meshBetweenPoints;
             correspondingMeshBetweenPoints.vertices = AllVerts.ToArray();
-            correspondingMeshBetweenPoints.uv = uvsToApply;
+            //correspondingMeshBetweenPoints.uv = uvsToApply;
             correspondingMeshBetweenPoints.triangles = triangleIndeces;
 
 
