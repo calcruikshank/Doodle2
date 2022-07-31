@@ -223,6 +223,8 @@ namespace Gameboard
             correspondingMeshObjectBetweenPoints.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
             correspondingMeshObjectBetweenPoints.GetComponent<MeshFilter>().mesh = correspondingMeshBetweenPoints;
             correspondingMeshObjectBetweenPoints.GetComponent<MeshRenderer>().material = drawMeshMaterial;
+
+            //no idea why i have to flip the scale maybe it's drawing upside down but reversing the triangle doesnt help. TODO
             correspondingMeshObjectBetweenPoints.transform.localScale = new Vector3(1,1,-1);
 
             newBoardObjectInfo.sceneObjectPositions.RemoveAt(0);
