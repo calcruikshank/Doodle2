@@ -18,7 +18,6 @@ namespace Gameboard
         private Color lineColor;
         private Vector3 lastPosition;
         Mesh meshBetweenPoints;
-
         public Dictionary<uint, NewBoardObjectInfo> boardObjectDict = new Dictionary<uint, NewBoardObjectInfo>();
         float colorTimerThresh = 5f;
         float colorTimer = 6f;
@@ -123,21 +122,21 @@ namespace Gameboard
                         Triangulator triangulator = new Triangulator(vertsToTriangulate);
 
 
-                         int[] triangleIndeces = triangulator.Triangulate();
+                        int[] triangleIndeces = triangulator.Triangulate();
 
 
-                         Mesh correspondingMesh = boardObjectDict[newBoardObject.sessionId].meshInBoardObject;
-                         correspondingMesh.vertices = verticesToApply;
-                         correspondingMesh.uv = uvsToApply;
-                         correspondingMesh.triangles = triangleIndeces;
+                        Mesh correspondingMesh = boardObjectDict[newBoardObject.sessionId].meshInBoardObject;
+                        correspondingMesh.vertices = verticesToApply;
+                        correspondingMesh.uv = uvsToApply;
+                        correspondingMesh.triangles = triangleIndeces;
 
-                         GameObject correspondingObject = boardObjectDict[newBoardObject.sessionId].gameObjectTiedToIt;
-                         correspondingObject.GetComponent<MeshFilter>().mesh = correspondingMesh;
-                         correspondingObject.GetComponent<MeshRenderer>().material = new Material(drawMeshMaterial);
-                         correspondingObject.GetComponent<MeshRenderer>().material.color = lineColor;
+                        GameObject correspondingObject = boardObjectDict[newBoardObject.sessionId].gameObjectTiedToIt;
+                        correspondingObject.GetComponent<MeshFilter>().mesh = correspondingMesh;
+                        correspondingObject.GetComponent<MeshRenderer>().material = new Material(drawMeshMaterial);
+                        correspondingObject.GetComponent<MeshRenderer>().material.color = lineColor;
 
-                         correspondingObject.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
-                        
+                        correspondingObject.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
+
 
                         boardObjectDict[newBoardObject.sessionId].AddToSceneObjectPositions(newBoardObject.sceneWorldPosition, verticesToApply.ToList());
                         if (boardObjectDict[newBoardObject.sessionId].sceneObjectPositions.Count >= 2)
@@ -188,7 +187,7 @@ namespace Gameboard
                     //pointsToTriangulate.Add(new Vector3(newBoardObjectInfo.pointsInTheContour[i][j].x, newBoardObjectInfo.pointsInTheContour[i][j].y, 1));
                 }
             }
-            
+
 
             pointsToTriangulate = JarvisMarchAlgorithm.GetConvexHull(pointsToTriangulate);
 
@@ -197,7 +196,7 @@ namespace Gameboard
             pointsToTriangulate.Add(pointsToTriangulate[0]);
             for (int y = 0; y < pointsToTriangulate.Count; y++)
             {
-                AllVerts.Add(new Vector3( pointsToTriangulate[y].x, pointsToTriangulate[y].y));
+                AllVerts.Add(new Vector3(pointsToTriangulate[y].x, pointsToTriangulate[y].y));
             }
             for (int x = 0; x < pointsToTriangulate.Count - 1; x++)
             {
@@ -208,7 +207,7 @@ namespace Gameboard
 
             Vector2[] pointsToTriangulateAfterSort = pointsToTriangulate.ToArray<Vector2>();
             //Vector2[] uvsToApply = new Vector2[AllVerts.Count];
-            Triangulator triangulator = new Triangulator(pointsToTriangulateAfterSort); 
+            Triangulator triangulator = new Triangulator(pointsToTriangulateAfterSort);
             int[] triangleIndeces = triangulator.Triangulate();
 
 
@@ -225,7 +224,7 @@ namespace Gameboard
             correspondingMeshObjectBetweenPoints.GetComponent<MeshRenderer>().material = drawMeshMaterial;
 
             //no idea why i have to flip the scale maybe it's drawing upside down but reversing the triangle doesnt help. TODO
-            correspondingMeshObjectBetweenPoints.transform.localScale = new Vector3(1,1,-1);
+            correspondingMeshObjectBetweenPoints.transform.localScale = new Vector3(1, 1, -1);
 
             newBoardObjectInfo.sceneObjectPositions.RemoveAt(0);
             newBoardObjectInfo.pointsInTheContour.RemoveAt(0);
