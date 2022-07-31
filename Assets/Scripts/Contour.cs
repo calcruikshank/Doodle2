@@ -91,7 +91,7 @@ namespace Gameboard
 
                     lastGameObject.GetComponent<MeshFilter>().mesh = mesh;
                     lastGameObject.GetComponent<MeshRenderer>().material = drawMeshMaterial;
-                    meshBetweenPointsObject.GetComponent<MeshFilter>().mesh = mesh;
+                    meshBetweenPointsObject.GetComponent<MeshFilter>().mesh = meshBetweenPoints;
                     meshBetweenPointsObject.GetComponent<MeshRenderer>().material = drawMeshMaterial;
 
                     NewBoardObjectInfo newBoardObjectInfo = new NewBoardObjectInfo(lastGameObject, newBoardObject.sessionId, mesh, meshBetweenPointsObject, meshBetweenPoints);
@@ -137,7 +137,7 @@ namespace Gameboard
                          correspondingObject.GetComponent<MeshRenderer>().material.color = lineColor;
 
                          correspondingObject.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
-
+                        
 
                         boardObjectDict[newBoardObject.sessionId].AddToSceneObjectPositions(newBoardObject.sceneWorldPosition, verticesToApply.ToList());
                         if (boardObjectDict[newBoardObject.sessionId].sceneObjectPositions.Count >= 2)
@@ -160,8 +160,8 @@ namespace Gameboard
                     GameObject correspondingMeshObject = boardObjectDict[id].GOBetweenPoints;
                     //Destroy(correspondingObject);
                     boardObjectDict.Remove(id);
-                    //Destroy(correspondingObject);
-                    //Destroy(correspondingMeshObject);
+                    Destroy(correspondingObject);
+                    Destroy(correspondingMeshObject);
 
                 }
             }
@@ -174,8 +174,8 @@ namespace Gameboard
 
         private void CreateMeshBetweenScenePoints(NewBoardObjectInfo newBoardObjectInfo, Vector3 forwardVector)
         {
-            Vector3 offset = CenterOfVectors(newBoardObjectInfo.sceneObjectPositions.ToArray());
             List<Vector2> pointsToTriangulate = new List<Vector2>();
+            Vector3 offset = CenterOfVectors(newBoardObjectInfo.sceneObjectPositions.ToArray());
             List<Vector3> AllVerts = new List<Vector3>();
             for (int i = newBoardObjectInfo.sceneObjectPositions.Count - 2; i <= newBoardObjectInfo.sceneObjectPositions.Count - 1; i++)
             {
@@ -183,16 +183,29 @@ namespace Gameboard
                 {
                     //Debug.Log(i + " i " + " and then j " + j);
                     //AllVerts.Add(new Vector3(newBoardObjectInfo.pointsInTheContour[i][j].x - newBoardObjectInfo.sceneObjectPositions[i].x + offset.x, newBoardObjectInfo.pointsInTheContour[i][j].y - newBoardObjectInfo.sceneObjectPositions[i].y + offset.y, 1));
-                    AllVerts.Add(new Vector3(newBoardObjectInfo.pointsInTheContour[i][j].x, newBoardObjectInfo.pointsInTheContour[i][j].y, 1));
+                    pointsToTriangulate.Add(new Vector3(newBoardObjectInfo.pointsInTheContour[i][j].x, newBoardObjectInfo.pointsInTheContour[i][j].y));
                     //pointsToTriangulate.Add(new Vector3(newBoardObjectInfo.pointsInTheContour[i][j].x - newBoardObjectInfo.sceneObjectPositions[i].x + offset.x, newBoardObjectInfo.pointsInTheContour[i][j].y - newBoardObjectInfo.sceneObjectPositions[i].y + offset.y, 1));
-                    pointsToTriangulate.Add(new Vector3(newBoardObjectInfo.pointsInTheContour[i][j].x, newBoardObjectInfo.pointsInTheContour[i][j].y, 1));
+                    //pointsToTriangulate.Add(new Vector3(newBoardObjectInfo.pointsInTheContour[i][j].x, newBoardObjectInfo.pointsInTheContour[i][j].y, 1));
                 }
             }
+            
+
+            pointsToTriangulate = JarvisMarchAlgorithm.GetConvexHull(pointsToTriangulate);
+
             pointsToTriangulate.Sort(new ClockWiseComparer(offset));
-            for (int x = 0; x < pointsToTriangulate.Count; x++)
+            //adds first point again
+            pointsToTriangulate.Add(pointsToTriangulate[0]);
+            for (int y = 0; y < pointsToTriangulate.Count; y++)
             {
-                Debug.LogError("Point to triangulate " + pointsToTriangulate[x] +  " count " + pointsToTriangulate.Count + " " + x);
+                AllVerts.Add(new Vector3( pointsToTriangulate[y].x, pointsToTriangulate[y].y) );
             }
+            for (int x = 0; x < pointsToTriangulate.Count - 1; x++)
+            {
+                Debug.DrawLine(pointsToTriangulate[x], pointsToTriangulate[x + 1], Color.white, 1000);
+
+                //Debug.LogError("Point to triangulate " + pointsToTriangulate[x] + " count " + pointsToTriangulate.Count + " " + x);
+            }
+
             Vector2[] pointsToTriangulateAfterSort = pointsToTriangulate.ToArray<Vector2>();
             Vector2[] uvsToApply = new Vector2[AllVerts.Count];
             Triangulator triangulator = new Triangulator(pointsToTriangulateAfterSort); 
@@ -210,7 +223,7 @@ namespace Gameboard
             correspondingMeshObjectBetweenPoints.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
             correspondingMeshObjectBetweenPoints.GetComponent<MeshFilter>().mesh = correspondingMeshBetweenPoints;
             correspondingMeshObjectBetweenPoints.GetComponent<MeshRenderer>().material = drawMeshMaterial;
-
+            correspondingMeshObjectBetweenPoints.transform.localScale = new Vector3(1,1,-1);
 
             newBoardObjectInfo.sceneObjectPositions.RemoveAt(0);
             newBoardObjectInfo.pointsInTheContour.RemoveAt(0);
