@@ -213,6 +213,7 @@ namespace Gameboard
 
 
             Mesh correspondingMeshBetweenPoints = newBoardObjectInfo.meshBetweenPoints;
+
             correspondingMeshBetweenPoints.vertices = AllVerts.ToArray();
             //correspondingMeshBetweenPoints.uv = uvsToApply;
             correspondingMeshBetweenPoints.triangles = triangleIndeces;
