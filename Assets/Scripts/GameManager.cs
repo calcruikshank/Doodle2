@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Camera UICamera;
     public int lastSortingOrder;
 
+    public Color lineColor;
     public static GameManager singleton;
     // Start is called before the first frame update
     void Start()
@@ -37,5 +38,54 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Clearing Draw Screen");
         DrawCamera.clearFlags = CameraClearFlags.Nothing;
+    }
+
+    public void SetColorRed()
+    {
+        lineColor = new Color(.93f, .11f, .14f);
+    }
+    public void SetColorOrange()
+    {
+        lineColor = new Color(.93f, .11f, .14f);
+    }
+    public void SetColorYellow()
+    {
+        lineColor = new Color(.93f, .11f, .14f);
+    }
+    public void SetColorGreen()
+    {
+        lineColor = new Color(.93f, .11f, .14f);
+    }
+    public void SetColorLightBlue()
+    {
+        lineColor = new Color(.93f, .11f, .14f);
+    }
+    public void SetColorDarBlue()
+    {
+        lineColor = new Color(.93f, .11f, .14f);
+    }
+    public void SetColorPurple()
+    {
+        lineColor = new Color(.93f, .11f, .14f);
+    }
+    public void SetColorPink()
+    {
+        lineColor = new Color(.93f, .11f, .14f);
+    }
+    public void SetColorBrown()
+    {
+        lineColor = new Color(.93f, .11f, .14f);
+    }
+    public void SetColorBlack()
+    {
+        lineColor = Color.black;
+    }
+    public void SetColorGray()
+    {
+        lineColor = Color.black;
+    }
+    public void SetColorWhite()
+    {
+        lineColor = Color.white;
     }
 }

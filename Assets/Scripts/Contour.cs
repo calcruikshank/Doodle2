@@ -14,7 +14,6 @@ namespace Gameboard
         public static Contour singleton;
         [SerializeField] private Material drawMeshMaterial;
         private float lineThickness = 1f;
-        private Color lineColor;
         private Vector3 lastPosition;
         Mesh meshBetweenPoints;
         public Dictionary<uint, NewBoardObjectInfo> boardObjectDict = new Dictionary<uint, NewBoardObjectInfo>();
@@ -38,8 +37,7 @@ namespace Gameboard
             if (colorTimer > colorTimerThresh)
             {
                 colorTimer = 0f;
-                lineColor = new Color(UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f));
-                drawMeshMaterial.color = lineColor;
+                //lineColor = new Color(UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f));
                 GameManager.singleton.lastSortingOrder++;
             }
         }
@@ -51,6 +49,7 @@ namespace Gameboard
                 if (!boardObjectDict.ContainsKey(newBoardObject.sessionId))
                 {
 
+                    drawMeshMaterial.color = GameManager.singleton.lineColor;
                     GameObject lastGameObject = new GameObject("DrawMeshSingle", typeof(MeshFilter), typeof(MeshRenderer));
                     GameManager.singleton.lastSortingOrder++;
                     lastGameObject.GetComponent<MeshRenderer>().sortingOrder = GameManager.singleton.lastSortingOrder;
@@ -104,6 +103,7 @@ namespace Gameboard
                     float minDistance = .05f;
                     if (Vector2.Distance(lastPosition, newBoardObject.sceneWorldPosition) > minDistance)
                     {
+                        drawMeshMaterial.color = GameManager.singleton.lineColor;
                         // Far enough from last point
                         Vector2 forwardVector = (newBoardObject.sceneWorldPosition - lastPosition);
 
@@ -132,7 +132,7 @@ namespace Gameboard
                         GameObject correspondingObject = boardObjectDict[newBoardObject.sessionId].gameObjectTiedToIt;
                         correspondingObject.GetComponent<MeshFilter>().mesh = correspondingMesh;
                         correspondingObject.GetComponent<MeshRenderer>().material = new Material(drawMeshMaterial);
-                        correspondingObject.GetComponent<MeshRenderer>().material.color = lineColor;
+                        correspondingObject.GetComponent<MeshRenderer>().material.color = GameManager.singleton.lineColor;
 
                         correspondingObject.GetComponent<MeshRenderer>().sortingOrder = GameManager.singleton.lastSortingOrder;
 
@@ -172,6 +172,7 @@ namespace Gameboard
 
         private void CreateMeshBetweenScenePoints(NewBoardObjectInfo newBoardObjectInfo, Vector3 forwardVector)
         {
+            drawMeshMaterial.color = GameManager.singleton.lineColor;
             List<Vector2> pointsToTriangulate = new List<Vector2>();
             Vector3 offset = CenterOfVectors(newBoardObjectInfo.sceneObjectPositions.ToArray());
             List<Vector3> AllVerts = new List<Vector3>();
