@@ -12,7 +12,6 @@ namespace Gameboard
     {
         public Gameboard gameboard;
         public static Contour singleton;
-        private int lastSortingOrder;
         [SerializeField] private Material drawMeshMaterial;
         private float lineThickness = 1f;
         private Color lineColor;
@@ -41,7 +40,7 @@ namespace Gameboard
                 colorTimer = 0f;
                 lineColor = new Color(UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f));
                 drawMeshMaterial.color = lineColor;
-                lastSortingOrder++;
+                GameManager.singleton.lastSortingOrder++;
             }
         }
         private void BoardObjectsUpdated(object sender, List<TrackedBoardObject> updatedList)
@@ -53,11 +52,11 @@ namespace Gameboard
                 {
 
                     GameObject lastGameObject = new GameObject("DrawMeshSingle", typeof(MeshFilter), typeof(MeshRenderer));
-                    lastSortingOrder++;
-                    lastGameObject.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
+                    GameManager.singleton.lastSortingOrder++;
+                    lastGameObject.GetComponent<MeshRenderer>().sortingOrder = GameManager.singleton.lastSortingOrder;
 
                     GameObject meshBetweenPointsObject = new GameObject("DrawMeshSingle", typeof(MeshFilter), typeof(MeshRenderer));
-                    meshBetweenPointsObject.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
+                    meshBetweenPointsObject.GetComponent<MeshRenderer>().sortingOrder = GameManager.singleton.lastSortingOrder;
 
                     Vector3[] verticesToApply = newBoardObject.contourWorldVectors3D;
 
@@ -135,7 +134,7 @@ namespace Gameboard
                         correspondingObject.GetComponent<MeshRenderer>().material = new Material(drawMeshMaterial);
                         correspondingObject.GetComponent<MeshRenderer>().material.color = lineColor;
 
-                        correspondingObject.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
+                        correspondingObject.GetComponent<MeshRenderer>().sortingOrder = GameManager.singleton.lastSortingOrder;
 
 
                         boardObjectDict[newBoardObject.sessionId].AddToSceneObjectPositions(newBoardObject.sceneWorldPosition, verticesToApply.ToList());
@@ -219,7 +218,7 @@ namespace Gameboard
 
 
             GameObject correspondingMeshObjectBetweenPoints = newBoardObjectInfo.GOBetweenPoints;
-            correspondingMeshObjectBetweenPoints.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
+            correspondingMeshObjectBetweenPoints.GetComponent<MeshRenderer>().sortingOrder = GameManager.singleton.lastSortingOrder;
             correspondingMeshObjectBetweenPoints.GetComponent<MeshFilter>().mesh = correspondingMeshBetweenPoints;
             correspondingMeshObjectBetweenPoints.GetComponent<MeshRenderer>().material = drawMeshMaterial;
 
