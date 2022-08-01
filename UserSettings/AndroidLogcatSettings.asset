@@ -3,7 +3,11 @@
     "m_SelectedPackage": {
         "deviceId": "10.1.10.9:5555",
         "name": "com.DefaultCompany.Doodle2",
+<<<<<<< Updated upstream
         "processId": 8571,
+=======
+        "processId": 5111,
+>>>>>>> Stashed changes
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -330,6 +334,54 @@
             "deviceId": "10.1.10.9:5555",
             "name": "com.DefaultCompany.Doodle2",
             "processId": 8571,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 4542,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 4694,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 4886,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 4530,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 4684,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 4835,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 4973,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 5111,
             "exited": false
         }
     ],
