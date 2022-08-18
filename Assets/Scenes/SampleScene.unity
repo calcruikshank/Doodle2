@@ -226,7 +226,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 23
+    m_Bits: 2147483647
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -783,7 +783,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6271035281573743828, guid: 83766b5da21899a49abcc2ab8d70b61c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -53
+      value: 89
       objectReference: {fileID: 0}
     - target: {fileID: 6271035281573743828, guid: 83766b5da21899a49abcc2ab8d70b61c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1040,7 +1040,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!20 &1658297896
 Camera:
   m_ObjectHideFlags: 0
@@ -1050,7 +1050,7 @@ Camera:
   m_GameObject: {fileID: 1658297894}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 4
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2

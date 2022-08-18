@@ -76,7 +76,6 @@ namespace Gameboard
                     Mesh mesh = new Mesh();
 
                     mesh.vertices = verticesToApply;
-                    mesh.uv = uvsToApply;
                     mesh.triangles = triangleIndeces;
 
                     Mesh meshBetweenPoints = new Mesh();
@@ -126,7 +125,6 @@ namespace Gameboard
 
                         Mesh correspondingMesh = boardObjectDict[newBoardObject.sessionId].meshInBoardObject;
                         correspondingMesh.vertices = verticesToApply;
-                        correspondingMesh.uv = uvsToApply;
                         correspondingMesh.triangles = triangleIndeces;
 
                         GameObject correspondingObject = boardObjectDict[newBoardObject.sessionId].gameObjectTiedToIt;
