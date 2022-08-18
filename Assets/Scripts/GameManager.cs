@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
         singleton = this;
-        ClearScreenWhite();
+        StartCoroutine(WaitForFrameStart());
     }
 
     // Update is called once per frame
@@ -40,7 +40,19 @@ public class GameManager : MonoBehaviour
 
         //returning 0 will make it wait 1 frame
         yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
+
+
+        //code goes here
+
+        clearScreenMesh.gameObject.SetActive(false);
+
+    }
+    IEnumerator WaitForFrameStart()
+    {
+        clearScreenMesh.gameObject.SetActive(true);
+
+        //returning 0 will make it wait 1 frame
+        yield return new WaitForSeconds(1f);
 
 
         //code goes here
