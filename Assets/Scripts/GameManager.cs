@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] Camera UICamera;
     public int lastSortingOrder;
 
+    [SerializeField] Transform clearScreenMesh;
+
     public Color lineColor;
     public static GameManager singleton;
     // Start is called before the first frame update
@@ -18,6 +20,7 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
         singleton = this;
+        ClearScreenWhite();
     }
 
     // Update is called once per frame
@@ -25,11 +28,25 @@ public class GameManager : MonoBehaviour
     {
 
     }
-
-    public void ClearDrawScreen()
+    public void ClearScreenWhite()
     {
-        DrawCamera.clearFlags = CameraClearFlags.Depth;
-        StartCoroutine("UploadPNG");
+        clearScreenMesh.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
+        clearScreenMesh.gameObject.SetActive(true);
+        StartCoroutine(WaitForFrame());
+        lastSortingOrder++;
+    }
+    IEnumerator WaitForFrame()
+    {
+
+        //returning 0 will make it wait 1 frame
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+
+
+        //code goes here
+
+        clearScreenMesh.gameObject.SetActive(false);
+
     }
     IEnumerator UploadPNG()
     {
@@ -37,7 +54,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
 
         Debug.Log("Clearing Draw Screen");
-        DrawCamera.clearFlags = CameraClearFlags.Nothing;
     }
 
     public void SetColorRed()
