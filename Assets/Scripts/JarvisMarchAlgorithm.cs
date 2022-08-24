@@ -75,7 +75,12 @@ public static class JarvisMarchAlgorithm
             }
 
             //Pick next point randomly
-            Vector2 nextPoint = points[Random.Range(0, points.Count - 1)];
+            int randomPoint = Random.Range(0, points.Count - 1);
+            Vector2 nextPoint = points[0];
+            if (randomPoint < points.Count && randomPoint > points.Count)
+            {
+                nextPoint = points[Random.Range(0, points.Count - 1)];
+            }
 
             //To 2d space so we can see if a point is to the left is the vector ab
             Vector2 a = currentPoint;

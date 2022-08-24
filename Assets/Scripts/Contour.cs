@@ -196,12 +196,6 @@ namespace Gameboard
             {
                 AllVerts.Add(new Vector3(pointsToTriangulate[y].x, pointsToTriangulate[y].y));
             }
-            for (int x = 0; x < pointsToTriangulate.Count - 1; x++)
-            {
-                //Debug.DrawLine(pointsToTriangulate[x], pointsToTriangulate[x + 1], Color.white, 1000);
-
-                //Debug.LogError("Point to triangulate " + pointsToTriangulate[x] + " count " + pointsToTriangulate.Count + " " + x);
-            }
 
             Vector2[] pointsToTriangulateAfterSort = pointsToTriangulate.ToArray<Vector2>();
             //Vector2[] uvsToApply = new Vector2[AllVerts.Count];
@@ -212,9 +206,19 @@ namespace Gameboard
 
             Mesh correspondingMeshBetweenPoints = newBoardObjectInfo.meshBetweenPoints;
 
-            correspondingMeshBetweenPoints.vertices = AllVerts.ToArray();
+
+            
+
             //correspondingMeshBetweenPoints.uv = uvsToApply;
+            foreach (int i in triangleIndeces)
+            {
+                if (i >= correspondingMeshBetweenPoints.vertices.Length)
+                {
+                    return;
+                }
+            }
             correspondingMeshBetweenPoints.triangles = triangleIndeces;
+            correspondingMeshBetweenPoints.vertices = AllVerts.ToArray();
 
 
             GameObject correspondingMeshObjectBetweenPoints = newBoardObjectInfo.GOBetweenPoints;
