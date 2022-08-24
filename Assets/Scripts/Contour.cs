@@ -59,7 +59,17 @@ namespace Gameboard
 
                     Vector3[] verticesToApply = newBoardObject.contourWorldVectors3D;
 
-                    Vector2[] uvsToApply = new Vector2[verticesToApply.Length];
+                    #region circleRegion
+                    List<Vector3> circleVertices = new List<Vector3>();
+                    if (verticesToApply.Length <= 8)
+                    {
+                        //TODO change 1f to be the width of the circle
+                        circleVertices = CreateCircleBasedOffCenterPoint(newBoardObject.sceneWorldPosition, .1f);
+                        verticesToApply = circleVertices.ToArray();
+                    }
+
+                    Debug.Log(verticesToApply.Length);
+                    #endregion
 
                     Vector2[] vertsToTriangulate = new Vector2[verticesToApply.Length];
                     for (int i = 0; i < verticesToApply.Length; i++)
@@ -78,15 +88,18 @@ namespace Gameboard
                     mesh.vertices = verticesToApply;
                     mesh.triangles = triangleIndeces;
 
+                    lastGameObject.GetComponent<MeshFilter>().mesh = mesh;
+                    lastGameObject.GetComponent<MeshRenderer>().material = drawMeshMaterial;
+
+                    lastGameObject.transform.position = new Vector3(lastGameObject.transform.position.x, lastGameObject.transform.position.y, -1);
+
                     Mesh meshBetweenPoints = new Mesh();
 
                     meshBetweenPoints.vertices = verticesToApply;
-                    meshBetweenPoints.uv = uvsToApply;
+                    //meshBetweenPoints.uv = uvsToApply;
                     meshBetweenPoints.triangles = triangleIndeces;
 
 
-                    lastGameObject.GetComponent<MeshFilter>().mesh = mesh;
-                    lastGameObject.GetComponent<MeshRenderer>().material = drawMeshMaterial;
                     meshBetweenPointsObject.GetComponent<MeshFilter>().mesh = meshBetweenPoints;
                     meshBetweenPointsObject.GetComponent<MeshRenderer>().material = drawMeshMaterial;
 
@@ -94,12 +107,13 @@ namespace Gameboard
                     boardObjectDict.Add(newBoardObject.sessionId, newBoardObjectInfo);
                     boardObjectDict[newBoardObject.sessionId].AddToSceneObjectPositions(newBoardObject.sceneWorldPosition, verticesToApply.ToList());
 
+                    meshBetweenPointsObject.transform.localScale = new Vector3(1, 1, -1);
                 }
 
 
                 if (boardObjectDict.ContainsKey(newBoardObject.sessionId))
                 {
-                    float minDistance = .05f;
+                    float minDistance = .005f;
                     if (Vector2.Distance(lastPosition, newBoardObject.sceneWorldPosition) > minDistance)
                     {
                         drawMeshMaterial.color = GameManager.singleton.lineColor;
@@ -109,6 +123,15 @@ namespace Gameboard
                         lastPosition = newBoardObject.sceneWorldPosition;
 
                         Vector3[] verticesToApply = newBoardObject.contourWorldVectors3D;
+
+                        List<Vector3> circleVertices = new List<Vector3>();
+                        if (verticesToApply.Length <= 8)
+                        {
+                            //TODO change 1f to be the width of the circle
+                            circleVertices = CreateCircleBasedOffCenterPoint(newBoardObject.sceneWorldPosition, .1f);
+                            verticesToApply = circleVertices.ToArray();
+                        }
+
                         Vector2[] uvsToApply = new Vector2[verticesToApply.Length];
                         Vector2[] vertsToTriangulate = new Vector2[verticesToApply.Length];
                         for (int i = 0; i < verticesToApply.Length; i++)
@@ -145,6 +168,19 @@ namespace Gameboard
             }
         }
 
+        private List<Vector3> CreateCircleBasedOffCenterPoint(Vector2 centerPoint, float width)
+        {
+            List<Vector3> circlePoints = new List<Vector3>();
+            float radius = width / 2;
+            for (int i = 0; i < 26; i++)
+            {
+                float angle = i * Mathf.PI * 2f / 26;
+                Vector3 newPos = new Vector3((Mathf.Cos(angle) * radius) + centerPoint.x, Mathf.Sin(angle) * radius + centerPoint.y, -1);
+               // GameObject go = Instantiate(GameObject.CreatePrimitive(PrimitiveType.Cube), newPos, Quaternion.identity);
+                circlePoints.Add(newPos);
+            }
+            return circlePoints;
+        }
 
         private void BoardObjectSessionsDeleted(object sender, List<uint> e)
         {
@@ -156,8 +192,8 @@ namespace Gameboard
                     GameObject correspondingMeshObject = boardObjectDict[id].GOBetweenPoints;
                     //Destroy(correspondingObject);
                     boardObjectDict.Remove(id);
-                    Destroy(correspondingObject);
-                    Destroy(correspondingMeshObject);
+                    //Destroy(correspondingObject);
+                    //Destroy(correspondingMeshObject);
 
                 }
             }
@@ -210,13 +246,7 @@ namespace Gameboard
             
 
             //correspondingMeshBetweenPoints.uv = uvsToApply;
-            foreach (int i in triangleIndeces)
-            {
-                if (i >= correspondingMeshBetweenPoints.vertices.Length)
-                {
-                    return;
-                }
-            }
+            
             correspondingMeshBetweenPoints.triangles = triangleIndeces;
             correspondingMeshBetweenPoints.vertices = AllVerts.ToArray();
 
