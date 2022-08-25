@@ -12,6 +12,7 @@ public class NewBoardObjectInfo
     public List<Vector3> sceneObjectPositions = new List<Vector3>();
     public Mesh meshInBoardObject;
     public Mesh meshBetweenPoints;
+    public float sizeOfAverageDistance;
     public NewBoardObjectInfo(GameObject GOSent, uint SessionIDSent, Mesh meshCreated, GameObject GOBetweenPointsSent, Mesh meshSentBetweenPoints)
     {
         objectSessionID = SessionIDSent;

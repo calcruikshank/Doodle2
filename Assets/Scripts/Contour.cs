@@ -69,8 +69,12 @@ namespace Gameboard
                     {
                         averageDistanceOfPoints = (newBoardObject.contourLocalVectors3D[0] - newBoardObject.contourLocalVectors3D[newBoardObject.contourLocalVectors3D.Length / 2]).magnitude;
                         //TODO change 1f to be the width of the circle
-                        circleVertices = CreateCircleBasedOffCenterPoint(newBoardObject.sceneWorldPosition, averageDistanceOfPoints);
-                        verticesToApply = circleVertices.ToArray();
+                        Debug.Log("Average distance of points " + averageDistanceOfPoints);
+                        if (averageDistanceOfPoints < .5f)
+                        {
+                            circleVertices = CreateCircleBasedOffCenterPoint(newBoardObject.sceneWorldPosition, averageDistanceOfPoints);
+                            verticesToApply = circleVertices.ToArray();
+                        }
                     }
 
                     #endregion
@@ -108,6 +112,7 @@ namespace Gameboard
                     meshBetweenPointsObject.GetComponent<MeshRenderer>().material = drawMeshMaterial;
 
                     NewBoardObjectInfo newBoardObjectInfo = new NewBoardObjectInfo(lastGameObject, newBoardObject.sessionId, mesh, meshBetweenPointsObject, meshBetweenPoints);
+                    newBoardObjectInfo.sizeOfAverageDistance = averageDistanceOfPoints;
                     boardObjectDict.Add(newBoardObject.sessionId, newBoardObjectInfo);
                     boardObjectDict[newBoardObject.sessionId].AddToSceneObjectPositions(newBoardObject.sceneWorldPosition, verticesToApply.ToList());
 
@@ -129,9 +134,11 @@ namespace Gameboard
                     List<Vector3> circleVertices = new List<Vector3>();
                     if (verticesToApply.Length <= 8)
                     {
-                        //TODO change 1f to be the width of the circle
-                        circleVertices = CreateCircleBasedOffCenterPoint(newBoardObject.sceneWorldPosition, averageDistanceOfPoints);
-                        verticesToApply = circleVertices.ToArray();
+                        if (boardObjectDict[newBoardObject.sessionId].sizeOfAverageDistance < .5f)
+                        {
+                            circleVertices = CreateCircleBasedOffCenterPoint(newBoardObject.sceneWorldPosition, boardObjectDict[newBoardObject.sessionId].sizeOfAverageDistance);
+                            verticesToApply = circleVertices.ToArray();
+                        }
                     }
 
                     Vector2[] uvsToApply = new Vector2[verticesToApply.Length];

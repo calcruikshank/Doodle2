@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "10.1.10.9:5555",
         "name": "com.DefaultCompany.Doodle2",
-        "processId": 6538,
+        "processId": 7130,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -72,6 +72,72 @@
             "deviceId": "10.1.10.9:5555",
             "name": "com.DefaultCompany.Doodle2",
             "processId": 6538,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 5002,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 5226,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 5454,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 5602,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 5749,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 6026,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 6249,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 6391,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 6696,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 6928,
+            "exited": false
+        },
+        {
+            "deviceId": "10.1.10.9:5555",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 7130,
             "exited": false
         }
     ],
