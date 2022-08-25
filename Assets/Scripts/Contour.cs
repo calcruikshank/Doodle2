@@ -247,7 +247,17 @@ namespace Gameboard
 
             Mesh correspondingMeshBetweenPoints = newBoardObjectInfo.meshBetweenPoints;
 
-
+            for (int i = 0; i < triangleIndeces.Length; i++)
+            {
+                if (triangleIndeces[i] >= correspondingMeshBetweenPoints.vertices.Length)
+                {
+                    triangleIndeces[i] = triangleIndeces[i] - 2; 
+                    if (triangleIndeces[i] >= correspondingMeshBetweenPoints.vertices.Length)
+                    {
+                        return;
+                    }
+                }
+            }
             
 
             //correspondingMeshBetweenPoints.uv = uvsToApply;
