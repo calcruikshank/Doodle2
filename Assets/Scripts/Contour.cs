@@ -19,6 +19,8 @@ namespace Gameboard
         public Dictionary<uint, NewBoardObjectInfo> boardObjectDict = new Dictionary<uint, NewBoardObjectInfo>();
         float colorTimerThresh = 5f;
         float colorTimer = 6f;
+
+        float averageDistanceOfPoints;
         IEnumerator Start()
         {
             while (gameboard.boardTouchController == null || gameboard.boardTouchController.boardTouchHandler == null)
@@ -60,11 +62,14 @@ namespace Gameboard
                     Vector3[] verticesToApply = newBoardObject.contourWorldVectors3D;
 
                     #region circleRegion
+
+
                     List<Vector3> circleVertices = new List<Vector3>();
                     if (verticesToApply.Length <= 8)
                     {
+                        averageDistanceOfPoints = (newBoardObject.contourLocalVectors3D[0] - newBoardObject.contourLocalVectors3D[newBoardObject.contourLocalVectors3D.Length / 2]).magnitude;
                         //TODO change 1f to be the width of the circle
-                        circleVertices = CreateCircleBasedOffCenterPoint(newBoardObject.sceneWorldPosition, .1f);
+                        circleVertices = CreateCircleBasedOffCenterPoint(newBoardObject.sceneWorldPosition, averageDistanceOfPoints);
                         verticesToApply = circleVertices.ToArray();
                     }
 
@@ -128,7 +133,7 @@ namespace Gameboard
                         if (verticesToApply.Length <= 8)
                         {
                             //TODO change 1f to be the width of the circle
-                            circleVertices = CreateCircleBasedOffCenterPoint(newBoardObject.sceneWorldPosition, .1f);
+                            circleVertices = CreateCircleBasedOffCenterPoint(newBoardObject.sceneWorldPosition, averageDistanceOfPoints);
                             verticesToApply = circleVertices.ToArray();
                         }
 
@@ -192,8 +197,8 @@ namespace Gameboard
                     GameObject correspondingMeshObject = boardObjectDict[id].GOBetweenPoints;
                     //Destroy(correspondingObject);
                     boardObjectDict.Remove(id);
-                    //Destroy(correspondingObject);
-                    //Destroy(correspondingMeshObject);
+                    Destroy(correspondingObject);
+                    Destroy(correspondingMeshObject);
 
                 }
             }
