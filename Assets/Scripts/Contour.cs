@@ -73,7 +73,6 @@ namespace Gameboard
                         verticesToApply = circleVertices.ToArray();
                     }
 
-                    Debug.Log(verticesToApply.Length);
                     #endregion
 
                     Vector2[] vertsToTriangulate = new Vector2[verticesToApply.Length];
@@ -119,55 +118,56 @@ namespace Gameboard
                 if (boardObjectDict.ContainsKey(newBoardObject.sessionId))
                 {
                     float minDistance = .005f;
+                    drawMeshMaterial.color = GameManager.singleton.lineColor;
+                    // Far enough from last point
+                    Vector2 forwardVector = (newBoardObject.sceneWorldPosition - lastPosition);
+
+                    lastPosition = newBoardObject.sceneWorldPosition;
+
+                    Vector3[] verticesToApply = newBoardObject.contourWorldVectors3D;
+
+                    List<Vector3> circleVertices = new List<Vector3>();
+                    if (verticesToApply.Length <= 8)
+                    {
+                        //TODO change 1f to be the width of the circle
+                        circleVertices = CreateCircleBasedOffCenterPoint(newBoardObject.sceneWorldPosition, averageDistanceOfPoints);
+                        verticesToApply = circleVertices.ToArray();
+                    }
+
+                    Vector2[] uvsToApply = new Vector2[verticesToApply.Length];
+                    Vector2[] vertsToTriangulate = new Vector2[verticesToApply.Length];
+                    for (int i = 0; i < verticesToApply.Length; i++)
+                    {
+                        verticesToApply[i] = new Vector3(verticesToApply[i].x, verticesToApply[i].y, 1);
+                        vertsToTriangulate[i] = (Vector2)verticesToApply[i];
+                    }
+
+                    Triangulator triangulator = new Triangulator(vertsToTriangulate);
+
+
+                    int[] triangleIndeces = triangulator.Triangulate();
+
+
+                    Mesh correspondingMesh = boardObjectDict[newBoardObject.sessionId].meshInBoardObject;
+                    correspondingMesh.vertices = verticesToApply;
+                    correspondingMesh.triangles = triangleIndeces;
+
+                    GameObject correspondingObject = boardObjectDict[newBoardObject.sessionId].gameObjectTiedToIt;
+                    correspondingObject.GetComponent<MeshFilter>().mesh = correspondingMesh;
+                    correspondingObject.GetComponent<MeshRenderer>().material = new Material(drawMeshMaterial);
+                    correspondingObject.GetComponent<MeshRenderer>().material.color = GameManager.singleton.lineColor;
+
+                    correspondingObject.GetComponent<MeshRenderer>().sortingOrder = GameManager.singleton.lastSortingOrder;
+
+
+                    boardObjectDict[newBoardObject.sessionId].AddToSceneObjectPositions(newBoardObject.sceneWorldPosition, verticesToApply.ToList());
+                    if (boardObjectDict[newBoardObject.sessionId].sceneObjectPositions.Count >= 2)
+                    {
+                        CreateMeshBetweenScenePoints(boardObjectDict[newBoardObject.sessionId], forwardVector);
+                    }
                     if (Vector2.Distance(lastPosition, newBoardObject.sceneWorldPosition) > minDistance)
                     {
-                        drawMeshMaterial.color = GameManager.singleton.lineColor;
-                        // Far enough from last point
-                        Vector2 forwardVector = (newBoardObject.sceneWorldPosition - lastPosition);
-
-                        lastPosition = newBoardObject.sceneWorldPosition;
-
-                        Vector3[] verticesToApply = newBoardObject.contourWorldVectors3D;
-
-                        List<Vector3> circleVertices = new List<Vector3>();
-                        if (verticesToApply.Length <= 8)
-                        {
-                            //TODO change 1f to be the width of the circle
-                            circleVertices = CreateCircleBasedOffCenterPoint(newBoardObject.sceneWorldPosition, averageDistanceOfPoints);
-                            verticesToApply = circleVertices.ToArray();
-                        }
-
-                        Vector2[] uvsToApply = new Vector2[verticesToApply.Length];
-                        Vector2[] vertsToTriangulate = new Vector2[verticesToApply.Length];
-                        for (int i = 0; i < verticesToApply.Length; i++)
-                        {
-                            verticesToApply[i] = new Vector3(verticesToApply[i].x, verticesToApply[i].y, 1);
-                            vertsToTriangulate[i] = (Vector2)verticesToApply[i];
-                        }
-
-                        Triangulator triangulator = new Triangulator(vertsToTriangulate);
-
-
-                        int[] triangleIndeces = triangulator.Triangulate();
-
-
-                        Mesh correspondingMesh = boardObjectDict[newBoardObject.sessionId].meshInBoardObject;
-                        correspondingMesh.vertices = verticesToApply;
-                        correspondingMesh.triangles = triangleIndeces;
-
-                        GameObject correspondingObject = boardObjectDict[newBoardObject.sessionId].gameObjectTiedToIt;
-                        correspondingObject.GetComponent<MeshFilter>().mesh = correspondingMesh;
-                        correspondingObject.GetComponent<MeshRenderer>().material = new Material(drawMeshMaterial);
-                        correspondingObject.GetComponent<MeshRenderer>().material.color = GameManager.singleton.lineColor;
-
-                        correspondingObject.GetComponent<MeshRenderer>().sortingOrder = GameManager.singleton.lastSortingOrder;
-
-
-                        boardObjectDict[newBoardObject.sessionId].AddToSceneObjectPositions(newBoardObject.sceneWorldPosition, verticesToApply.ToList());
-                        if (boardObjectDict[newBoardObject.sessionId].sceneObjectPositions.Count >= 2)
-                        {
-                            CreateMeshBetweenScenePoints(boardObjectDict[newBoardObject.sessionId], forwardVector);
-                        }
+                        
                     }
                 }
             }
