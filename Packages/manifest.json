@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.lastgameboard.unity.gameboardsdk": "1.0.21",
+    "com.lastgameboard.unity.gameboardsdk": "1.0.26",
     "com.unity.collab-proxy": "1.17.1",
     "com.unity.feature.2d": "1.0.0",
     "com.unity.ide.rider": "3.0.15",

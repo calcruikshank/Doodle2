@@ -48,6 +48,14 @@ namespace Gameboard
 
             foreach (TrackedBoardObject newBoardObject in updatedList)
             {
+                if (newBoardObject.gameboardScreenPosition.x == 0 && newBoardObject.gameboardScreenPosition.y == 0)
+                {
+                    continue;
+                }
+                if (newBoardObject.contourWorldVectors3D == null)
+                {
+                    continue;
+                }
                 if (!boardObjectDict.ContainsKey(newBoardObject.sessionId))
                 {
 
@@ -150,7 +158,6 @@ namespace Gameboard
                     }
 
                     Triangulator triangulator = new Triangulator(vertsToTriangulate);
-
 
                     int[] triangleIndeces = triangulator.Triangulate();
 
