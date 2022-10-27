@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public static GameManager singleton;
 
     public Vector3 positionToSpawnUI;
-
+    [SerializeField] Canvas mainCanvas;
 
     [SerializeField] Transform redUI;
     [SerializeField] Transform blackUI;
@@ -27,6 +27,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform purpleUI;
     [SerializeField] Transform pinkUI;
     [SerializeField] Transform grayUI;
+
+
+    public Vector3 positionToSpawn;
+    Vector3 bottomRightSpawn = new Vector3(400, -800, 0);
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +40,7 @@ public class GameManager : MonoBehaviour
         }
         singleton = this;
         StartCoroutine(WaitForFrameStart());
+        SetColorBlack();
     }
 
     // Update is called once per frame
@@ -115,6 +120,7 @@ public class GameManager : MonoBehaviour
     public void SetColorBlack()
     {
         lineColor = Color.black;
+        Instantiate(blackUI, mainCanvas.transform).GetComponent<RectTransform>().position = bottomRightSpawn;
     }
     public void SetColorGray()
     {
