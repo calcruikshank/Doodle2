@@ -12,6 +12,21 @@ public class GameManager : MonoBehaviour
 
     public Color lineColor;
     public static GameManager singleton;
+
+    public Vector3 positionToSpawnUI;
+
+
+    [SerializeField] Transform redUI;
+    [SerializeField] Transform blackUI;
+    [SerializeField] Transform brownUI;
+    [SerializeField] Transform orangeUI;
+    [SerializeField] Transform yellowUI;
+    [SerializeField] Transform greenUI;
+    [SerializeField] Transform lightBlueUI;
+    [SerializeField] Transform darkBlueUI;
+    [SerializeField] Transform purpleUI;
+    [SerializeField] Transform pinkUI;
+    [SerializeField] Transform grayUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,13 +74,6 @@ public class GameManager : MonoBehaviour
 
         clearScreenMesh.gameObject.SetActive(false);
 
-    }
-    IEnumerator UploadPNG()
-    {
-        // We should only read the screen buffer after rendering is complete
-        yield return new WaitForEndOfFrame();
-
-        Debug.Log("Clearing Draw Screen");
     }
 
     public void SetColorRed()

@@ -1741,7 +1741,7 @@ GameObject:
   - component: {fileID: 6271035281573743830}
   - component: {fileID: 6271035281573743829}
   m_Layer: 5
-  m_Name: DrawMenu
+  m_Name: RedMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
