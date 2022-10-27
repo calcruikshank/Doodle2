@@ -45,6 +45,7 @@ namespace Gameboard.Examples
                                 if (hit.GetComponent<UserPresenceSceneObject>())
                                 {
                                     Debug.Log("hit player!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " + hit.transform);
+                                    hit.GetComponent<UserPresenceSceneObject>().ShowPrompt();
                                 }
                             }
 

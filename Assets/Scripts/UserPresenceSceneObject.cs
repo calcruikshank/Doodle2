@@ -4,6 +4,8 @@ using UnityEngine;
 using Gameboard.EventArgs;
 using Gameboard.Helpers;
 using UnityEngine;
+using System;
+
 namespace Gameboard
 {
 
@@ -123,6 +125,11 @@ namespace Gameboard
 
                     break;
             }
+        }
+
+        internal void ShowPrompt()
+        {
+            GameManager.singleton.ShowPlayerPrompt();
         }
 
         private void UpdatePlayerPositionIfNeeded()

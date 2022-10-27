@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -12,7 +13,7 @@ public class UIManager : MonoBehaviour
 
     public static UIManager singleton;
 
-    WordList wordList;
+    public WordList wordList;
     private void Awake()
     {
         difficulty = 2;
@@ -29,6 +30,7 @@ public class UIManager : MonoBehaviour
         wordList = this.GetComponent<WordList>();
         DontDestroyOnLoad(this);
         LoadGameScene();
+        ChangeWord();
     }
 
     // Update is called once per frame
@@ -81,7 +83,6 @@ public class UIManager : MonoBehaviour
     void ChangeWord()
     {
         wordList.ChangePrompt();
-        Debug.LogError(
-        wordList.currentWord);
     }
+
 }

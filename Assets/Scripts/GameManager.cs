@@ -1,6 +1,7 @@
 using Gameboard.Examples;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -73,6 +74,7 @@ public class GameManager : MonoBehaviour
         //code goes here
 
         GameManager.singleton.clearScreenMesh.gameObject.SetActive(false);
+        ShowPlayerPrompt();
 
     }
     IEnumerator WaitForFrameStart()
@@ -211,5 +213,15 @@ public class GameManager : MonoBehaviour
     public void EndTurn()
     {
         ClearUI();
+    }
+
+
+    [SerializeField] TextMeshProUGUI promptText;
+    public void ShowPlayerPrompt()
+    {
+        GameObject newPrompt = Instantiate(promptText.gameObject, mainCanvas.transform);
+        newPrompt.transform.position = positionToSpawn;
+        newPrompt.GetComponent<TextMeshProUGUI>().text = UIManager.singleton.wordList.currentWord.ToString();
+        newPrompt.gameObject.SetActive(true);
     }
 }
