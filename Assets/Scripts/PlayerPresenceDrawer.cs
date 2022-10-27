@@ -16,6 +16,8 @@ namespace Gameboard.Examples
         UserPresenceController userPresenceController;
         CardController cardController;
         AssetController assetController;
+
+        public Vector3 positionOfPlayer;
         private void Awake()
         {
             GameboardLogging.Verbose("UserPresenceExample Awake");
@@ -28,6 +30,7 @@ namespace Gameboard.Examples
 
         public void UpdatePlayerPositionOnStart(Vector2 vectorSent)
         {
+            Debug.Log(vectorSent);
             var  playerSceneDrawerPosition = GameboardHelperMethods.GameboardScreenPointToScenePoint(Camera.main, vectorSent);
             Debug.LogError(playerSceneDrawerPosition + " Player presence scene drawer update");
             ScenePositionUpdated(playerSceneDrawerPosition);
@@ -37,7 +40,7 @@ namespace Gameboard.Examples
         protected override void ScenePositionUpdated(Vector3 inNewPosition)
         {
             this.transform.position = inNewPosition;
-            Debug.Log("UpdatedPosition = " + inNewPosition);
+            Debug.LogError("UpdatedPosition = " + inNewPosition);
         }
         protected override void LocalEulerAnglesUpdated(Vector3 inNewEulers)
         {

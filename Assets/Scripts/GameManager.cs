@@ -1,3 +1,4 @@
+using Gameboard.Examples;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,6 +33,8 @@ public class GameManager : MonoBehaviour
     public Vector3 positionToSpawn;
     Vector3 bottomRightSpawn;
     public Vector3 positionToSpawn2 = new Vector3();
+
+    public List<PlayerPresenceDrawer> playersInScene;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,8 +45,10 @@ public class GameManager : MonoBehaviour
         singleton = this;
         StartCoroutine(WaitForFrameStart());
         bottomRightSpawn = new Vector3(1400, 150, 0);
+        positionToSpawn = bottomRightSpawn;
         mainCanvas = FindObjectOfType<Canvas>();
         SetColorBlack();
+        ClearUI();
     }
 
     // Update is called once per frame
@@ -53,10 +58,10 @@ public class GameManager : MonoBehaviour
     }
     public void ClearScreenWhite()
     {
-        clearScreenMesh.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
-        clearScreenMesh.gameObject.SetActive(true);
-        StartCoroutine(WaitForFrame());
-        lastSortingOrder++;
+        GameManager.singleton.clearScreenMesh.GetComponent<MeshRenderer>().sortingOrder = lastSortingOrder;
+        GameManager.singleton.clearScreenMesh.gameObject.SetActive(true);
+        GameManager.singleton.StartCoroutine(WaitForFrame());
+        GameManager.singleton.lastSortingOrder++;
     }
     IEnumerator WaitForFrame()
     {
@@ -67,12 +72,12 @@ public class GameManager : MonoBehaviour
 
         //code goes here
 
-        clearScreenMesh.gameObject.SetActive(false);
+        GameManager.singleton.clearScreenMesh.gameObject.SetActive(false);
 
     }
     IEnumerator WaitForFrameStart()
     {
-        clearScreenMesh.gameObject.SetActive(true);
+        GameManager.singleton.clearScreenMesh.gameObject.SetActive(true);
 
         //returning 0 will make it wait 1 frame
         yield return new WaitForSeconds(1f);
@@ -80,116 +85,131 @@ public class GameManager : MonoBehaviour
 
         //code goes here
 
-        clearScreenMesh.gameObject.SetActive(false);
+        GameManager.singleton.clearScreenMesh.gameObject.SetActive(false);
 
     }
 
     public void SetColorRed()
     {
-        lineColor = new Color(.93f, .11f, .14f);
+        GameManager.singleton.lineColor = new Color(.93f, .11f, .14f);
         if (mainCanvas == null)
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(redUI, mainCanvas.transform).GetComponent<RectTransform>().position = new Vector3(1400, 150, 0);
+        Instantiate(redUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorOrange()
     {
-        lineColor = new Color(.97f, .58f, .11f);
+        GameManager.singleton.lineColor = new Color(.97f, .58f, .11f);
         if (mainCanvas == null)
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(orangeUI, mainCanvas.transform).GetComponent<RectTransform>().position = new Vector3(1400, 150, 0);
+        Instantiate(orangeUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorYellow()
     {
-        lineColor = new Color(1f, .95f, 0f);
+        GameManager.singleton.lineColor = new Color(1f, .95f, 0f);
         if (mainCanvas == null)
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(yellowUI, mainCanvas.transform).GetComponent<RectTransform>().position = new Vector3(1400, 150, 0);
+        Instantiate(yellowUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorGreen()
     {
-        lineColor = new Color(0f, .65f, .32f);
+        GameManager.singleton.lineColor = new Color(0f, .65f, .32f);
         if (mainCanvas == null)
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(greenUI, mainCanvas.transform).GetComponent<RectTransform>().position = new Vector3(1400, 150, 0);
+        Instantiate(greenUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorLightBlue()
     {
-        lineColor = new Color(0f, .68f, .94f);
+        GameManager.singleton.lineColor = new Color(0f, .68f, .94f);
         if (mainCanvas == null)
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(lightBlueUI, mainCanvas.transform).GetComponent<RectTransform>().position = new Vector3(1400, 150, 0);
+        Instantiate(lightBlueUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorDarBlue()
     {
-        lineColor = new Color(.18f, .19f, .57f);
+        GameManager.singleton.lineColor = new Color(.18f, .19f, .57f);
         if (mainCanvas == null)
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(darkBlueUI, mainCanvas.transform).GetComponent<RectTransform>().position = new Vector3(1400, 150, 0);
+        Instantiate(darkBlueUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorPurple()
     {
-        lineColor = new Color(.57f, .15f, .56f);
+        GameManager.singleton.lineColor = new Color(.57f, .15f, .56f);
         if (mainCanvas == null)
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(purpleUI, mainCanvas.transform).GetComponent<RectTransform>().position = new Vector3(1400, 150, 0);
+        Instantiate(purpleUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorPink()
     {
-        lineColor = new Color(.94f, .31f, .53f);
+        GameManager.singleton.lineColor = new Color(.94f, .31f, .53f);
         if (mainCanvas == null)
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(pinkUI, mainCanvas.transform).GetComponent<RectTransform>().position = new Vector3(1400, 150, 0);
+        Instantiate(pinkUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorBrown()
     {
-        lineColor = new Color(.46f, .30f, .16f);
+        GameManager.singleton.lineColor = new Color(.46f, .30f, .16f);
         if (mainCanvas == null)
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(brownUI, mainCanvas.transform).GetComponent<RectTransform>().position = new Vector3(1400, 150, 0);
+        Instantiate(brownUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorBlack()
     {
-        lineColor = Color.black; 
+        GameManager.singleton.lineColor = Color.black; 
         if (mainCanvas == null)
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(blackUI, mainCanvas.transform).GetComponent<RectTransform>().position = new Vector3(1400, 150, 0);
+        Instantiate(blackUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorGray()
     {
-        lineColor = new Color(.51f, .51f, .52f);
+        GameManager.singleton.lineColor = new Color(.51f, .51f, .52f);
         if (mainCanvas == null)
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(grayUI, mainCanvas.transform).GetComponent<RectTransform>().position = new Vector3(1400, 150, 0);
+        Instantiate(grayUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorWhite()
     {
-        lineColor = Color.white;
+        GameManager.singleton.lineColor = Color.white;
         if (mainCanvas == null)
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(blackUI, mainCanvas.transform).GetComponent<RectTransform>().position = new Vector3(1400, 150, 0);
+        Instantiate(blackUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
+    }
+
+
+    [SerializeField] Transform clearUIMesh;
+    public void ClearUI()
+    {
+        Transform clearMeshUI = Instantiate(clearUIMesh, GameManager.singleton.mainCanvas.transform);
+        clearMeshUI.gameObject.SetActive(true);
+        clearMeshUI.gameObject.SetActive(false);
+        SetColorBlack();
+    }
+
+    public void EndTurn()
+    {
+        ClearUI();
     }
 }

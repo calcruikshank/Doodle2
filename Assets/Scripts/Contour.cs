@@ -32,6 +32,7 @@ namespace Gameboard
             gameboard.boardTouchController.boardTouchHandler.BoardObjectsUpdated += BoardObjectsUpdated;
 
             singleton = this;
+            gameboard.GetComponent<DrawerController>().HideDrawers();
         }
         private void Update()
         {

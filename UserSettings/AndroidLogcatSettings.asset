@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "122011400100051",
         "name": "com.DefaultCompany.Doodle2",
-        "processId": 5509,
+        "processId": 7645,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -149,79 +149,121 @@
         {
             "deviceId": "122011400100051",
             "name": "com.DefaultCompany.Doodle2",
-            "processId": 4508,
-            "exited": false
-        },
-        {
-            "deviceId": "122011400100051",
-            "name": "com.DefaultCompany.Doodle2",
-            "processId": 4506,
-            "exited": false
-        },
-        {
-            "deviceId": "122011400100051",
-            "name": "com.DefaultCompany.Doodle2",
-            "processId": 4720,
-            "exited": false
-        },
-        {
-            "deviceId": "122011400100051",
-            "name": "com.DefaultCompany.Doodle2",
-            "processId": 4868,
-            "exited": false
-        },
-        {
-            "deviceId": "122011400100051",
-            "name": "com.DefaultCompany.Doodle2",
-            "processId": 4509,
-            "exited": false
-        },
-        {
-            "deviceId": "122011400100051",
-            "name": "com.DefaultCompany.Doodle2",
-            "processId": 4663,
-            "exited": false
-        },
-        {
-            "deviceId": "122011400100051",
-            "name": "com.DefaultCompany.Doodle2",
-            "processId": 4520,
-            "exited": false
-        },
-        {
-            "deviceId": "122011400100051",
-            "name": "com.DefaultCompany.Doodle2",
-            "processId": 4691,
-            "exited": false
-        },
-        {
-            "deviceId": "122011400100051",
-            "name": "com.DefaultCompany.Doodle2",
-            "processId": 4836,
-            "exited": false
-        },
-        {
-            "deviceId": "122011400100051",
-            "name": "com.DefaultCompany.Doodle2",
-            "processId": 4981,
-            "exited": false
-        },
-        {
-            "deviceId": "122011400100051",
-            "name": "com.DefaultCompany.Doodle2",
-            "processId": 5124,
-            "exited": false
-        },
-        {
-            "deviceId": "122011400100051",
-            "name": "com.DefaultCompany.Doodle2",
-            "processId": 5369,
-            "exited": false
-        },
-        {
-            "deviceId": "122011400100051",
-            "name": "com.DefaultCompany.Doodle2",
             "processId": 5509,
+            "exited": true
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 4536,
+            "exited": true
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 4718,
+            "exited": true
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 4883,
+            "exited": true
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.lastgameboard.gameboardlauncher",
+            "processId": 4012,
+            "exited": false
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 5615,
+            "exited": false
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 5750,
+            "exited": false
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 5895,
+            "exited": false
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 6037,
+            "exited": false
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 6210,
+            "exited": false
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 6357,
+            "exited": false
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 6486,
+            "exited": false
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 6651,
+            "exited": false
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 6811,
+            "exited": false
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 6951,
+            "exited": false
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 7088,
+            "exited": false
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 7223,
+            "exited": false
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 7366,
+            "exited": false
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 7508,
+            "exited": false
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 7645,
             "exited": false
         }
     ],
