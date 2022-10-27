@@ -50,14 +50,16 @@ MonoBehaviour:
   clearScreenMesh: {fileID: 0}
   lineColor: {r: 0, g: 0, b: 0, a: 0}
   positionToSpawnUI: {x: 0, y: 0, z: 0}
-  redUI: {fileID: 0}
+  redUI: {fileID: 6271035281573743828, guid: 2b9afec4d422ae0419000351c63dd33d, type: 3}
   blackUI: {fileID: 6271035281573743828, guid: 83766b5da21899a49abcc2ab8d70b61c, type: 3}
-  brownUI: {fileID: 0}
-  orangeUI: {fileID: 0}
-  yellowUI: {fileID: 0}
-  greenUI: {fileID: 0}
-  lightBlueUI: {fileID: 0}
-  darkBlueUI: {fileID: 0}
-  purpleUI: {fileID: 0}
-  pinkUI: {fileID: 0}
-  grayUI: {fileID: 0}
+  brownUI: {fileID: 6271035281573743828, guid: 92fe2b845efafd84484031d8a60b4f7a, type: 3}
+  orangeUI: {fileID: 6271035281573743828, guid: de6efbd525462644aa273ff5996d5b9f, type: 3}
+  yellowUI: {fileID: 6271035281573743828, guid: 61d77f120b3daa94e9a35df6c8f8697b, type: 3}
+  greenUI: {fileID: 6271035281573743828, guid: dc291eefff6e12845888ad65208c993b, type: 3}
+  lightBlueUI: {fileID: 6271035281573743828, guid: 7b72eaadaf89f9c40a0805155b5fc38f, type: 3}
+  darkBlueUI: {fileID: 6271035281573743828, guid: 34f1774aab1a5144cb907f1b02057243, type: 3}
+  purpleUI: {fileID: 6271035281573743828, guid: 00ffb3a850e73074d9fe117db6d7369c, type: 3}
+  pinkUI: {fileID: 6271035281573743828, guid: 4a54cb2e5b6631c46bf559a962e693b9, type: 3}
+  grayUI: {fileID: 6271035281573743828, guid: 5076de4e925a5464e90cfe0cc5bf7fab, type: 3}
+  positionToSpawn: {x: 0, y: 0, z: 0}
+  positionToSpawn2: {x: 0, y: 0, z: 0}

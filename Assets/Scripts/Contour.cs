@@ -75,7 +75,7 @@ namespace Gameboard
                     List<Vector3> circleVertices = new List<Vector3>();
                     if (verticesToApply.Length <= 8)
                     {
-                        averageDistanceOfPoints = (newBoardObject.contourLocalVectors3D[0] - newBoardObject.contourLocalVectors3D[newBoardObject.contourLocalVectors3D.Length / 2]).magnitude;
+                        averageDistanceOfPoints = (newBoardObject.contourLocalVectors3D[0] - newBoardObject.contourLocalVectors3D[newBoardObject.contourLocalVectors3D.Length / 2]).magnitude * .75f;
                         //TODO change 1f to be the width of the circle
                         Debug.Log("Average distance of points " + averageDistanceOfPoints);
                         if (averageDistanceOfPoints < .5f)
