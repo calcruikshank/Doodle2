@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public static GameManager singleton;
 
     public Vector3 positionToSpawnUI;
-   Canvas mainCanvas;
+    public Canvas mainCanvas;
 
     [SerializeField] Transform redUI;
     [SerializeField] Transform blackUI;

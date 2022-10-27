@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "122011400100051",
         "name": "com.DefaultCompany.Doodle2",
-        "processId": 5768,
+        "processId": 6514,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -366,6 +366,36 @@
             "deviceId": "122011400100051",
             "name": "com.DefaultCompany.Doodle2",
             "processId": 5768,
+            "exited": false
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 5908,
+            "exited": false
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 6049,
+            "exited": false
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 6201,
+            "exited": false
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 6342,
+            "exited": false
+        },
+        {
+            "deviceId": "122011400100051",
+            "name": "com.DefaultCompany.Doodle2",
+            "processId": 6514,
             "exited": false
         }
     ],

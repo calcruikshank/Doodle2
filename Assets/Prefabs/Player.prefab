@@ -85,3 +85,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae7aeb2eae527f847abc7ca28b4fa576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointsHUD: {fileID: 2069721566303251333, guid: a8454a3008c2aa34aa05736e3d05341e, type: 3}

@@ -26,6 +26,7 @@ namespace Gameboard
 #endif
         }
 
+
 #if UNITY_EDITOR
         public void EditorOnly_HaveUserLeaveGame()
         {
@@ -170,6 +171,13 @@ namespace Gameboard
         protected virtual void PlayerRemoved() { }
         protected virtual void PlayerNameChanged() { }
         protected virtual void PlayerColorChanged() { }
+
+        [SerializeField] Transform pointsHUD;
+
+        internal void SpawnInPointHUD(Vector3 positionToSpawn)
+        {
+            Instantiate(pointsHUD, GameManager.singleton.mainCanvas.transform).position = positionToSpawn;
+        }
     }
 
 }
