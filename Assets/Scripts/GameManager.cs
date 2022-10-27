@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     Vector3 bottomRightSpawn;
     public Vector3 positionToSpawn2 = new Vector3();
 
+
+    Transform lastColorPicked;
     public List<PlayerPresenceDrawer> playersInScene;
     // Start is called before the first frame update
     void Start()
@@ -98,7 +100,8 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(redUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
+        lastColorPicked = Instantiate(redUI, mainCanvas.transform).GetComponent<RectTransform>();
+        lastColorPicked.position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorOrange()
     {
@@ -107,7 +110,8 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(orangeUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
+        lastColorPicked = Instantiate(orangeUI, mainCanvas.transform).GetComponent<RectTransform>();
+        lastColorPicked.position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorYellow()
     {
@@ -116,7 +120,8 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(yellowUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
+        lastColorPicked = Instantiate(yellowUI, mainCanvas.transform).GetComponent<RectTransform>();
+        lastColorPicked.position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorGreen()
     {
@@ -125,7 +130,8 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(greenUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
+        lastColorPicked = Instantiate(greenUI, mainCanvas.transform).GetComponent<RectTransform>();
+        lastColorPicked.position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorLightBlue()
     {
@@ -134,7 +140,8 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(lightBlueUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
+        lastColorPicked = Instantiate(lightBlueUI, mainCanvas.transform).GetComponent<RectTransform>();
+        lastColorPicked.position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorDarBlue()
     {
@@ -143,7 +150,8 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(darkBlueUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
+        lastColorPicked = Instantiate(darkBlueUI, mainCanvas.transform).GetComponent<RectTransform>();
+        lastColorPicked.position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorPurple()
     {
@@ -152,7 +160,8 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(purpleUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
+        lastColorPicked = Instantiate(purpleUI, mainCanvas.transform).GetComponent<RectTransform>();
+        lastColorPicked.position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorPink()
     {
@@ -161,7 +170,8 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(pinkUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
+        lastColorPicked = Instantiate(pinkUI, mainCanvas.transform).GetComponent<RectTransform>();
+        lastColorPicked.position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorBrown()
     {
@@ -170,7 +180,8 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(brownUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
+        lastColorPicked = Instantiate(brownUI, mainCanvas.transform).GetComponent<RectTransform>();
+        lastColorPicked.position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorBlack()
     {
@@ -179,7 +190,8 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(blackUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
+        lastColorPicked = Instantiate(blackUI, mainCanvas.transform).GetComponent<RectTransform>();
+        lastColorPicked.position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorGray()
     {
@@ -188,7 +200,8 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(grayUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
+        lastColorPicked = Instantiate(grayUI, mainCanvas.transform).GetComponent<RectTransform>() ;
+        lastColorPicked.position = GameManager.singleton.positionToSpawn;
     }
     public void SetColorWhite()
     {
@@ -197,7 +210,8 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        Instantiate(blackUI, mainCanvas.transform).GetComponent<RectTransform>().position = GameManager.singleton.positionToSpawn;
+        lastColorPicked = Instantiate(blackUI, mainCanvas.transform).GetComponent<RectTransform>();
+        lastColorPicked.position = GameManager.singleton.positionToSpawn;
     }
 
 
@@ -217,11 +231,23 @@ public class GameManager : MonoBehaviour
 
 
     [SerializeField] TextMeshProUGUI promptText;
+    [SerializeField] Transform promptTextPrefab;
     public void ShowPlayerPrompt()
     {
-        GameObject newPrompt = Instantiate(promptText.gameObject, mainCanvas.transform);
+        GameObject newPrompt = Instantiate(promptTextPrefab.gameObject, mainCanvas.transform);
         newPrompt.transform.position = positionToSpawn;
-        newPrompt.GetComponent<TextMeshProUGUI>().text = UIManager.singleton.wordList.currentWord.ToString();
+        newPrompt.GetComponentInChildren<TextMeshProUGUI>().text = UIManager.singleton.wordList.currentWord.ToString();
         newPrompt.gameObject.SetActive(true);
+    }
+    public void HidePrompt()
+    {
+        if (GameManager.singleton.lastColorPicked != null)
+        {
+            lastColorPicked = Instantiate(GameManager.singleton.lastColorPicked, mainCanvas.transform).GetComponent<RectTransform>();
+        }
+        if (lastColorPicked == null)
+        {
+            SetColorBlack();
+        }
     }
 }

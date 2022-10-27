@@ -332,8 +332,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 665.8384, y: 100}
+  m_AnchoredPosition: {x: 0, y: -5.7499}
+  m_SizeDelta: {x: 586.2402, y: 260.4606}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &674124543
 MonoBehaviour:
@@ -355,8 +355,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1384,6 +1384,10 @@ PrefabInstance:
       propertyPath: clearScreenMesh
       value: 
       objectReference: {fileID: 1372282275}
+    - target: {fileID: 7082747492346683501, guid: d8bc34d514037b14a8cace6ab0112e33, type: 3}
+      propertyPath: promptTextPrefab
+      value: 
+      objectReference: {fileID: 674124542}
     - target: {fileID: 7082747492346683502, guid: d8bc34d514037b14a8cace6ab0112e33, type: 3}
       propertyPath: m_RootOrder
       value: 4

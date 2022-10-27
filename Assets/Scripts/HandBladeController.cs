@@ -25,6 +25,7 @@ namespace Gameboard.Examples
             }
         }
 
+        UserPresenceSceneObject lastUser;
         void BoardObjectsUpdated(object origin, List<TrackedBoardObject> newBoardObjectList)
         {
             lock (trackingBoardObjects)
@@ -44,8 +45,8 @@ namespace Gameboard.Examples
                             {
                                 if (hit.GetComponent<UserPresenceSceneObject>())
                                 {
-                                    Debug.Log("hit player!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " + hit.transform);
-                                    hit.GetComponent<UserPresenceSceneObject>().ShowPrompt();
+                                    lastUser = hit.GetComponent<UserPresenceSceneObject>();
+                                    lastUser.ShowPrompt();
                                 }
                             }
 
@@ -62,7 +63,12 @@ namespace Gameboard.Examples
             {
                 foreach (uint thisInt in deletedSessionIdList)
                 {
-                    handBlade.position = Vector3.zero;
+                    if (lastUser != null)
+                    {
+                        GameManager.singleton.HidePrompt();
+                        handBlade.position = Vector3.zero;
+                        lastUser = null;
+                    }
                 }
             }
         }
