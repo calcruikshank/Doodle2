@@ -176,7 +176,8 @@ namespace Gameboard
 
         internal void SpawnInPointHUD(Vector3 positionToSpawn)
         {
-            Instantiate(pointsHUD, GameManager.singleton.mainCanvas.transform).position = positionToSpawn;
+            //Instantiate(pointsHUD, GameManager.singleton.mainCanvas.transform).position = positionToSpawn;
+            Debug.LogError("Spawning in oplayer");
         }
     }
 

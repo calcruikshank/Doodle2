@@ -39,11 +39,10 @@ namespace Gameboard.Examples
                         {
                             SetHandbladePosition(newBoardObject.sceneWorldPosition, newBoardObject.tuio.ptr.angle * Mathf.Rad2Deg, newBoardObject.sessionId);
 
-
-
                             Collider2D hit = Physics2D.OverlapPoint(handBlade.position, rayMask);
                             if (hit != null)
                             {
+                                Debug.LogError("egjiopdfjeiogfrigjegrveoigerjgeiorj@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                                 if (hit.GetComponent<UserPresenceSceneObject>())
                                 {
                                     lastUser = hit.GetComponent<UserPresenceSceneObject>();

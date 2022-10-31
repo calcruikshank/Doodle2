@@ -21,6 +21,7 @@ namespace Gameboard
         float colorTimer = 6f;
 
         float averageDistanceOfPoints;
+        GUIStyle textStyle = new GUIStyle();
         IEnumerator Start()
         {
             while (gameboard.boardTouchController == null || gameboard.boardTouchController.boardTouchHandler == null)
@@ -30,9 +31,26 @@ namespace Gameboard
             gameboard.boardTouchController.boardTouchHandler.NewBoardObjectsCreated += NewBoardObjectsCreated;
             gameboard.boardTouchController.boardTouchHandler.BoardObjectSessionsDeleted += BoardObjectSessionsDeleted;
             gameboard.boardTouchController.boardTouchHandler.BoardObjectsUpdated += BoardObjectsUpdated;
-            Application.targetFrameRate = 60;
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = 144;
             singleton = this;
+            textStyle.normal.textColor = Color.black;
             gameboard.GetComponent<DrawerController>().HideDrawers();
+        }
+        float lastreadout;
+        void OnGUI()
+        {
+            float fpsreadout = 1.0f / Time.deltaTime;
+
+            if (fpsreadout > lastreadout)
+            {
+                lastreadout = fpsreadout;
+            }
+            string fps = "peak: " + lastreadout.ToString() + " current: " + fpsreadout.ToString() + " screen resfresh: " + Screen.currentResolution.refreshRate;
+
+           // GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 200f, 200f), fps, textStyle);
+            //Debug.Log(fps);
+
         }
         private void Update()
         {

@@ -17,6 +17,7 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SpawnPlayer(new Vector3(1400, 150, 0));
         for (int i = 0; i < 8; i++)
         {
             SpawnPlayerScore(playerScores[i]);
@@ -40,16 +41,16 @@ public class PlayerManager : MonoBehaviour
     public void SpawnPlayer(Vector3 positionToSpawn)
     {
         instantiatedPlayer = Instantiate(playerPrefab, Camera.main.ScreenToWorldPoint(positionToSpawn), Quaternion.identity);
-        //instantiatedPlayer.GetComponent<UserPresenceSceneObject>().SpawnInPointHUD(positionToSpawn);
     }
 
     public void StartPlayerTurn(int playerNumber)
     {
-        UIManager.singleton.ChangeWord();
+        //UIManager.singleton.ChangeWord();
         foreach (Transform pl in playersInstantiated)
         {
             pl.gameObject.SetActive(true);
         }
         playersInstantiated[playerNumber].gameObject.SetActive(false);
     }
+
 }
