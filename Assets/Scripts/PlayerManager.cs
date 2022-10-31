@@ -35,7 +35,6 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        StartPlayerTurn(0);
     }
 
     public void SpawnPlayer(Vector3 positionToSpawn)
@@ -45,7 +44,7 @@ public class PlayerManager : MonoBehaviour
 
     public void StartPlayerTurn(int playerNumber)
     {
-        //UIManager.singleton.ChangeWord();
+        UIManager.singleton.ChangeWord();
         foreach (Transform pl in playersInstantiated)
         {
             pl.gameObject.SetActive(true);
