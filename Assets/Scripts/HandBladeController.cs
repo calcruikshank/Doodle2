@@ -42,7 +42,6 @@ namespace Gameboard.Examples
                             Collider2D hit = Physics2D.OverlapPoint(handBlade.position, rayMask);
                             if (hit != null)
                             {
-                                Debug.LogError("egjiopdfjeiogfrigjegrveoigerjgeiorj@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                                 if (hit.GetComponent<UserPresenceSceneObject>())
                                 {
                                     lastUser = hit.GetComponent<UserPresenceSceneObject>();

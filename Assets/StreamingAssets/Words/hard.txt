@@ -98,3 +98,128 @@ positive
 dizzy
 czar
 hydrogen
+onomatopoeia
+albert einstein
+goth
+coffee 
+wizard
+gear
+shrek
+trex
+velociraptor
+hacker
+tentacle
+mech
+ghost
+halloween
+witch
+troll
+stapler
+concept
+physics
+science
+memory
+consciousness 
+orange 
+apple 
+bear 
+gopher
+mars
+covid-19
+telecommuting
+weeb
+pride
+jealosy
+naruto
+pun
+synonym 
+conundrum 
+paradox
+palindrome
+chaos
+donkey
+plushie
+depression
+wanderlust
+wonder
+perfect
+whoopie cushion
+flatulance
+comedy
+drama
+action
+romcom
+streaming
+unity
+diplomacy
+lifespan
+civilization
+urban sprawl
+wild fire
+hurricane
+flood
+insomnia
+quake
+event
+cereal
+red panda
+panda
+yeet
+dab
+HVAC
+Elvis 
+collection
+hobby
+moist
+stonehenge
+door hinge
+office
+orifice
+morpheus
+morbius
+schrodingers cat 
+pandoras box 
+corpse
+cemetery
+achilles heal
+hot rod
+terminal
+penguin
+pinky
+cozy
+lazy
+plumber 
+white board 
+chalk board
+train
+board game
+zombie
+promotion
+impressionism
+salem witch trials
+the crucible
+the cheesesteak factory
+ventilation
+power hour
+corruption
+thievery
+johnnny depp 
+public transportation
+bath robe
+hat
+gameboard 
+shirt
+capital
+nerd
+goon
+racecar
+
+
+
+
+
+
+
+
+
+

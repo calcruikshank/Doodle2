@@ -59,6 +59,7 @@ namespace Gameboard
             userId = inUserId;
         }
 
+
         public void UpdateUserPresence(GameboardUserPresenceEventArgs inEventArgs)
         {
             // In case the player was created via a seat key, they may not have a userid assigned yet. Assign that now. Note that this
