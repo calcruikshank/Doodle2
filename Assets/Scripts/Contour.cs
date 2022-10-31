@@ -30,7 +30,7 @@ namespace Gameboard
             gameboard.boardTouchController.boardTouchHandler.NewBoardObjectsCreated += NewBoardObjectsCreated;
             gameboard.boardTouchController.boardTouchHandler.BoardObjectSessionsDeleted += BoardObjectSessionsDeleted;
             gameboard.boardTouchController.boardTouchHandler.BoardObjectsUpdated += BoardObjectsUpdated;
-
+            Application.targetFrameRate = 60;
             singleton = this;
             gameboard.GetComponent<DrawerController>().HideDrawers();
         }

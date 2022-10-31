@@ -80,7 +80,7 @@ public class UIManager : MonoBehaviour
             difficultyText.text = "HARD";
         }
     }
-    void ChangeWord()
+    public void ChangeWord()
     {
         wordList.ChangePrompt();
     }

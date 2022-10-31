@@ -9,30 +9,47 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] Transform playerPrefab;
     Transform instantiatedPlayer;
 
-    Canvas mainCanvas;
+    [SerializeField] List<Transform> playerScores;
+    [SerializeField] Transform playerHud;
 
-    [SerializeField] List<Transform> playerOnCanvasPositions;
+    List<Transform> playersInstantiated = new List<Transform>();
 
-    [SerializeField] Transform playerScorePrefab;
     // Start is called before the first frame update
     void Start()
     {
-        mainCanvas = FindObjectOfType<Canvas>();
         for (int i = 0; i < 8; i++)
         {
-
-            SpawnPlayerScore(playerOnCanvasPositions[i]);
+            SpawnPlayerScore(playerScores[i]);
         }
     }
 
-    private void SpawnPlayerScore(Transform trsfrm)
+    private void SpawnPlayerScore(Transform trnsfrm)
     {
-        Instantiate(playerScorePrefab, trsfrm.position, trsfrm.rotation);
+        Transform instantiatedScore = Instantiate(playerHud, FindObjectOfType<Canvas>().transform);
+        instantiatedScore.transform.position = trnsfrm.position;
+        instantiatedScore.transform.rotation = trnsfrm.rotation;
+        playersInstantiated.Add(instantiatedScore);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        StartPlayerTurn(0);
+    }
+
+    public void SpawnPlayer(Vector3 positionToSpawn)
+    {
+        instantiatedPlayer = Instantiate(playerPrefab, Camera.main.ScreenToWorldPoint(positionToSpawn), Quaternion.identity);
+        //instantiatedPlayer.GetComponent<UserPresenceSceneObject>().SpawnInPointHUD(positionToSpawn);
+    }
+
+    public void StartPlayerTurn(int playerNumber)
+    {
+        UIManager.singleton.ChangeWord();
+        foreach (Transform pl in playersInstantiated)
+        {
+            pl.gameObject.SetActive(true);
+        }
+        playersInstantiated[playerNumber].gameObject.SetActive(false);
     }
 }

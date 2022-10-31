@@ -12,6 +12,7 @@ namespace Gameboard.Examples
 
         [SerializeField] Transform handBlade;
 
+        [SerializeField]LayerMask rayMask;
         void Update()
         {
             if (!setupFinished)
@@ -40,7 +41,7 @@ namespace Gameboard.Examples
 
 
 
-                            Collider2D hit = Physics2D.OverlapPoint(handBlade.position);
+                            Collider2D hit = Physics2D.OverlapPoint(handBlade.position, rayMask);
                             if (hit != null)
                             {
                                 if (hit.GetComponent<UserPresenceSceneObject>())
