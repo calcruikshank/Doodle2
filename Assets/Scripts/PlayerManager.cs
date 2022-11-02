@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] Transform playerHud;
 
     public List<Transform> playersInstantiated = new List<Transform>();
+    public List<Transform> playersCollidersInstantiated = new List<Transform>();
 
     public static PlayerManager singleton;
 
@@ -28,10 +29,10 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpawnPlayer(new Vector3(1400, 150, 0));
         for (int i = 0; i < 8; i++)
         {
             SpawnPlayerScore(playerScores[i]);
+            SpawnPlayer(playerScores[i]);
         }
     }
 
@@ -67,9 +68,11 @@ public class PlayerManager : MonoBehaviour
         
     }
 
-    public void SpawnPlayer(Vector3 positionToSpawn)
+    public void SpawnPlayer(Transform trnsfrm)
     {
-        instantiatedPlayer = Instantiate(playerPrefab, Camera.main.ScreenToWorldPoint(positionToSpawn), Quaternion.identity);
+        instantiatedPlayer = Instantiate(playerPrefab, Camera.main.ScreenToWorldPoint(trnsfrm.position), Quaternion.identity);
+        instantiatedPlayer.rotation = trnsfrm.rotation;
+        playersCollidersInstantiated.Add(instantiatedPlayer);
     }
 
     public void StartPlayerTurn(int playerNumber)
@@ -79,10 +82,21 @@ public class PlayerManager : MonoBehaviour
         {
             pl.gameObject.SetActive(true);
             pl.SetAsLastSibling();
+            
+        }
+        foreach (Transform plc in playersCollidersInstantiated)
+        {
+            plc.gameObject.SetActive(false);
+            //plc.SetAsLastSibling();
+
         }
         if (playersInstantiated[playerNumber].gameObject != null)
         {
             playersInstantiated[playerNumber].gameObject.SetActive(false);
+        }
+        if (playersCollidersInstantiated[playerNumber].gameObject != null)
+        {
+            playersCollidersInstantiated[playerNumber].gameObject.SetActive(true);
         }
     }
 

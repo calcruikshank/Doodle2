@@ -298,12 +298,12 @@ public class GameManager : MonoBehaviour
     {
         SetPlayerTurn(GameManager.singleton.playerTurn);
         ClearUI();
-        //PlayerManager.singleton.StartPlayerTurn(GameManager.singleton.playerTurn);
+        PlayerManager.singleton.StartPlayerTurn(GameManager.singleton.playerTurn);
         SetColorBlack();
         GameManager.singleton.playerTurn++;
-        if (playerTurn == PlayerManager.singleton.playersInstantiated.Count)
+        if (GameManager.singleton.playerTurn == PlayerManager.singleton.playersInstantiated.Count)
         {
-            playerTurn = 0;
+            GameManager.singleton.playerTurn = 0;
         }
     }
 
@@ -318,7 +318,8 @@ public class GameManager : MonoBehaviour
             Destroy(GameManager.singleton.newPrompt);
         }
         GameManager.singleton.newPrompt = Instantiate(promptTextPrefab.gameObject, mainCanvas.transform);
-        GameManager.singleton.newPrompt.transform.position = positionToSpawn;
+        GameManager.singleton.newPrompt.transform.position = GameManager.singleton.positionToSpawn;
+        GameManager.singleton.newPrompt.transform.localEulerAngles = GameManager.singleton.eulerAnglesToSet;
         GameManager.singleton.newPrompt.GetComponentInChildren<TextMeshProUGUI>().text = UIManager.singleton.wordList.currentWord.ToString();
         GameManager.singleton.newPrompt.gameObject.SetActive(true);
     }
@@ -340,6 +341,14 @@ public class GameManager : MonoBehaviour
         if (GameManager.singleton.eulerAnglesToSet.z == 180)
         {
             GameManager.singleton.positionToSpawn = new Vector3(GameManager.singleton.positionToSpawn.x, GameManager.singleton.positionToSpawn.y - 100, GameManager.singleton.positionToSpawn.z);
+        }
+        if (GameManager.singleton.eulerAnglesToSet.z == 90)
+        {
+            GameManager.singleton.positionToSpawn = new Vector3(GameManager.singleton.positionToSpawn.x - 100, GameManager.singleton.positionToSpawn.y, GameManager.singleton.positionToSpawn.z);
+        }
+        if (GameManager.singleton.eulerAnglesToSet.z == 270)
+        {
+            GameManager.singleton.positionToSpawn = new Vector3(GameManager.singleton.positionToSpawn.x + 100, GameManager.singleton.positionToSpawn.y, GameManager.singleton.positionToSpawn.z);
         }
     }
 }
