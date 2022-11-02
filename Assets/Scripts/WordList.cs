@@ -23,7 +23,7 @@ public class WordList : MonoBehaviour
     void Awake()
     {
         LoadDictionaries();
-        promptText = contentWindow.GetChild(0).GetComponent<TextMeshProUGUI>();
+        //promptText = contentWindow.GetChild(0).GetComponent<TextMeshProUGUI>();
     }
 
     async void LoadDictionaries()

@@ -9,11 +9,22 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] Transform playerPrefab;
     Transform instantiatedPlayer;
 
-    [SerializeField] List<Transform> playerScores;
+    [SerializeField] public List<Transform> playerScores;
     [SerializeField] Transform playerHud;
 
-    List<Transform> playersInstantiated = new List<Transform>();
+    public List<Transform> playersInstantiated = new List<Transform>();
 
+    public static PlayerManager singleton;
+
+
+    private void Awake()
+    {
+        if (singleton != null)
+        {
+            Destroy(this);
+        }
+        singleton = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -33,8 +44,27 @@ public class PlayerManager : MonoBehaviour
     }
 
     // Update is called once per frame
+
+    float waitTimer;
+    bool hasDestroyedAll = true;
     void Update()
     {
+        waitTimer += Time.deltaTime;
+        if (!hasDestroyedAll)
+        {
+            if (waitTimer > .1f)
+            {
+                if (GameObject.Find("ClearUIMesh(Clone)"))
+                {
+                    Destroy(GameObject.Find("ClearUIMesh(Clone)"));
+                }
+                else
+                {
+                    hasDestroyedAll = true;
+                }
+            }
+        }
+        
     }
 
     public void SpawnPlayer(Vector3 positionToSpawn)
@@ -48,8 +78,22 @@ public class PlayerManager : MonoBehaviour
         foreach (Transform pl in playersInstantiated)
         {
             pl.gameObject.SetActive(true);
+            pl.SetAsLastSibling();
         }
-        playersInstantiated[playerNumber].gameObject.SetActive(false);
+        if (playersInstantiated[playerNumber].gameObject != null)
+        {
+            playersInstantiated[playerNumber].gameObject.SetActive(false);
+        }
+    }
+
+    Transform disableTransformInAFrame;
+    public void WaitForFrame(Transform sentTransform)
+    {
+        waitTimer = 0; hasDestroyedAll = false;
+         disableTransformInAFrame = sentTransform;
+        sentTransform.gameObject.SetActive(true);
+
+
     }
 
 }

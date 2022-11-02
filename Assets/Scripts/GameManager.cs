@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
+    //this is the most frusturating script. there is a reason why every variable has gamemanager.singleton before it. 
     [SerializeField] Camera DrawCamera;
     [SerializeField] Camera UICamera;
     public int lastSortingOrder;
@@ -33,9 +35,12 @@ public class GameManager : MonoBehaviour
 
     public Vector3 positionToSpawn;
     Vector3 bottomRightSpawn;
+    Vector3 topRightSpawn;
+    Vector3 topRotation;
     public Vector3 positionToSpawn2 = new Vector3();
 
 
+    Vector3 eulerAnglesToSet;
     Transform lastColorPicked;
     public List<PlayerPresenceDrawer> playersInScene;
     // Start is called before the first frame update
@@ -48,10 +53,13 @@ public class GameManager : MonoBehaviour
         singleton = this;
         StartCoroutine(WaitForFrameStart());
         bottomRightSpawn = new Vector3(1400, 150, 0);
-        positionToSpawn = bottomRightSpawn;
+        topRightSpawn = new Vector3(1400, 1770, 0);
+        topRotation = new Vector3(180, 180, 0);
+        positionToSpawn = topRightSpawn;
+        eulerAnglesToSet = topRotation;
         mainCanvas = FindObjectOfType<Canvas>();
         SetColorBlack();
-        ClearUI();
+        EndTurn();
     }
 
     // Update is called once per frame
@@ -79,6 +87,7 @@ public class GameManager : MonoBehaviour
         ShowPlayerPrompt();
 
     }
+
     IEnumerator WaitForFrameStart()
     {
         GameManager.singleton.clearScreenMesh.gameObject.SetActive(true);
@@ -100,8 +109,13 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        lastColorPicked = Instantiate(redUI, mainCanvas.transform).GetComponent<RectTransform>();
-        lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        if (GameManager.singleton.lastColorPicked != null)
+        {
+            Destroy(GameManager.singleton.lastColorPicked.gameObject);
+        }
+        GameManager.singleton.lastColorPicked = Instantiate(redUI, mainCanvas.transform).GetComponent<RectTransform>();
+        GameManager.singleton.lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        GameManager.singleton.lastColorPicked.localEulerAngles = GameManager.singleton.eulerAnglesToSet;
     }
     public void SetColorOrange()
     {
@@ -110,8 +124,13 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        lastColorPicked = Instantiate(orangeUI, mainCanvas.transform).GetComponent<RectTransform>();
-        lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        if (GameManager.singleton.lastColorPicked != null)
+        {
+            Destroy(GameManager.singleton.lastColorPicked.gameObject);
+        }
+        GameManager.singleton.lastColorPicked = Instantiate(orangeUI, mainCanvas.transform).GetComponent<RectTransform>();
+        GameManager.singleton.lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        GameManager.singleton.lastColorPicked.localEulerAngles = GameManager.singleton.eulerAnglesToSet;
     }
     public void SetColorYellow()
     {
@@ -120,8 +139,13 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        lastColorPicked = Instantiate(yellowUI, mainCanvas.transform).GetComponent<RectTransform>();
-        lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        if (GameManager.singleton.lastColorPicked != null)
+        {
+            Destroy(GameManager.singleton.lastColorPicked.gameObject);
+        }
+        GameManager.singleton.lastColorPicked = Instantiate(yellowUI, mainCanvas.transform).GetComponent<RectTransform>();
+        GameManager.singleton.lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        GameManager.singleton.lastColorPicked.localEulerAngles = GameManager.singleton.eulerAnglesToSet;
     }
     public void SetColorGreen()
     {
@@ -130,8 +154,13 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        lastColorPicked = Instantiate(greenUI, mainCanvas.transform).GetComponent<RectTransform>();
-        lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        if (GameManager.singleton.lastColorPicked != null)
+        {
+            Destroy(GameManager.singleton.lastColorPicked.gameObject);
+        }
+        GameManager.singleton.lastColorPicked = Instantiate(greenUI, mainCanvas.transform).GetComponent<RectTransform>();
+        GameManager.singleton.lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        GameManager.singleton.lastColorPicked.localEulerAngles = GameManager.singleton.eulerAnglesToSet;
     }
     public void SetColorLightBlue()
     {
@@ -140,8 +169,13 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        lastColorPicked = Instantiate(lightBlueUI, mainCanvas.transform).GetComponent<RectTransform>();
-        lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        if (GameManager.singleton.lastColorPicked != null)
+        {
+            Destroy(GameManager.singleton.lastColorPicked.gameObject);
+        }
+        GameManager.singleton.lastColorPicked = Instantiate(lightBlueUI, mainCanvas.transform).GetComponent<RectTransform>();
+        GameManager.singleton.lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        GameManager.singleton.lastColorPicked.localEulerAngles = GameManager.singleton.eulerAnglesToSet;
     }
     public void SetColorDarBlue()
     {
@@ -150,8 +184,13 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        lastColorPicked = Instantiate(darkBlueUI, mainCanvas.transform).GetComponent<RectTransform>();
-        lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        if (GameManager.singleton.lastColorPicked != null)
+        {
+            Destroy(GameManager.singleton.lastColorPicked.gameObject);
+        }
+        GameManager.singleton.lastColorPicked = Instantiate(darkBlueUI, mainCanvas.transform).GetComponent<RectTransform>();
+        GameManager.singleton.lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        GameManager.singleton.lastColorPicked.localEulerAngles = GameManager.singleton.eulerAnglesToSet;
     }
     public void SetColorPurple()
     {
@@ -160,8 +199,13 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        lastColorPicked = Instantiate(purpleUI, mainCanvas.transform).GetComponent<RectTransform>();
-        lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        if (GameManager.singleton.lastColorPicked != null)
+        {
+            Destroy(GameManager.singleton.lastColorPicked.gameObject);
+        }
+        GameManager.singleton.lastColorPicked = Instantiate(purpleUI, mainCanvas.transform).GetComponent<RectTransform>();
+        GameManager.singleton.lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        GameManager.singleton.lastColorPicked.localEulerAngles = GameManager.singleton.eulerAnglesToSet;
     }
     public void SetColorPink()
     {
@@ -170,8 +214,13 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        lastColorPicked = Instantiate(pinkUI, mainCanvas.transform).GetComponent<RectTransform>();
-        lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        if (GameManager.singleton.lastColorPicked != null)
+        {
+            Destroy(GameManager.singleton.lastColorPicked.gameObject);
+        }
+        GameManager.singleton.lastColorPicked = Instantiate(pinkUI, mainCanvas.transform).GetComponent<RectTransform>();
+        GameManager.singleton.lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        GameManager.singleton.lastColorPicked.localEulerAngles = GameManager.singleton.eulerAnglesToSet;
     }
     public void SetColorBrown()
     {
@@ -180,8 +229,13 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        lastColorPicked = Instantiate(brownUI, mainCanvas.transform).GetComponent<RectTransform>();
-        lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        if (GameManager.singleton.lastColorPicked != null)
+        {
+            Destroy(GameManager.singleton.lastColorPicked.gameObject);
+        }
+        GameManager.singleton.lastColorPicked = Instantiate(brownUI, mainCanvas.transform).GetComponent<RectTransform>();
+        GameManager.singleton.lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        GameManager.singleton.lastColorPicked.localEulerAngles = GameManager.singleton.eulerAnglesToSet;
     }
     public void SetColorBlack()
     {
@@ -190,8 +244,13 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        lastColorPicked = Instantiate(blackUI, mainCanvas.transform).GetComponent<RectTransform>();
-        lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        if (GameManager.singleton.lastColorPicked != null)
+        {
+            Destroy(GameManager.singleton.lastColorPicked.gameObject);
+        }
+        GameManager.singleton.lastColorPicked = Instantiate(blackUI, mainCanvas.transform).GetComponent<RectTransform>();
+        GameManager.singleton.lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        GameManager.singleton.lastColorPicked.localEulerAngles = GameManager.singleton.eulerAnglesToSet;
     }
     public void SetColorGray()
     {
@@ -200,8 +259,13 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        lastColorPicked = Instantiate(grayUI, mainCanvas.transform).GetComponent<RectTransform>() ;
-        lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        if (GameManager.singleton.lastColorPicked != null)
+        {
+            Destroy(GameManager.singleton.lastColorPicked.gameObject);
+        }
+        GameManager.singleton.lastColorPicked = Instantiate(grayUI, mainCanvas.transform).GetComponent<RectTransform>() ;
+        GameManager.singleton.lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        GameManager.singleton.lastColorPicked.localEulerAngles = GameManager.singleton.eulerAnglesToSet;
     }
     public void SetColorWhite()
     {
@@ -210,44 +274,72 @@ public class GameManager : MonoBehaviour
         {
             mainCanvas = FindObjectOfType<Canvas>();
         }
-        lastColorPicked = Instantiate(blackUI, mainCanvas.transform).GetComponent<RectTransform>();
-        lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        if (GameManager.singleton.lastColorPicked != null)
+        {
+            Destroy(GameManager.singleton.lastColorPicked.gameObject);
+        }
+        GameManager.singleton.lastColorPicked = Instantiate(blackUI, mainCanvas.transform).GetComponent<RectTransform>();
+        GameManager.singleton.lastColorPicked.position = GameManager.singleton.positionToSpawn;
+        GameManager.singleton.lastColorPicked.localEulerAngles = GameManager.singleton.eulerAnglesToSet;
     }
 
 
     [SerializeField] Transform clearUIMesh;
+    Transform inststiatedClearUIMesh;
     public void ClearUI()
     {
-        Transform clearMeshUI = Instantiate(clearUIMesh, GameManager.singleton.mainCanvas.transform);
-        clearMeshUI.gameObject.SetActive(true);
-        clearMeshUI.gameObject.SetActive(false);
+        GameManager.singleton.inststiatedClearUIMesh = Instantiate(GameManager.singleton.clearUIMesh, GameManager.singleton.mainCanvas.transform);
+        PlayerManager.singleton.WaitForFrame(GameManager.singleton.inststiatedClearUIMesh);
         SetColorBlack();
     }
 
+    public int playerTurn;
     public void EndTurn()
     {
+        SetPlayerTurn(GameManager.singleton.playerTurn);
         ClearUI();
+        //PlayerManager.singleton.StartPlayerTurn(GameManager.singleton.playerTurn);
+        SetColorBlack();
+        GameManager.singleton.playerTurn++;
+        if (playerTurn == PlayerManager.singleton.playersInstantiated.Count)
+        {
+            playerTurn = 0;
+        }
     }
 
 
-    [SerializeField] TextMeshProUGUI promptText;
     [SerializeField] Transform promptTextPrefab;
+    public GameObject newPrompt;
+
     public void ShowPlayerPrompt()
     {
-        GameObject newPrompt = Instantiate(promptTextPrefab.gameObject, mainCanvas.transform);
-        newPrompt.transform.position = positionToSpawn;
-        newPrompt.GetComponentInChildren<TextMeshProUGUI>().text = UIManager.singleton.wordList.currentWord.ToString();
-        newPrompt.gameObject.SetActive(true);
+        if (GameManager.singleton.newPrompt != null)
+        {
+            Destroy(GameManager.singleton.newPrompt);
+        }
+        GameManager.singleton.newPrompt = Instantiate(promptTextPrefab.gameObject, mainCanvas.transform);
+        GameManager.singleton.newPrompt.transform.position = positionToSpawn;
+        GameManager.singleton.newPrompt.GetComponentInChildren<TextMeshProUGUI>().text = UIManager.singleton.wordList.currentWord.ToString();
+        GameManager.singleton.newPrompt.gameObject.SetActive(true);
     }
     public void HidePrompt()
     {
-        if (GameManager.singleton.lastColorPicked != null)
+        Destroy(GameManager.singleton.newPrompt.gameObject);
+        SetColorBlack();
+        
+    }
+
+    public void SetPlayerTurn(int playerNumber)
+    {
+        GameManager.singleton.positionToSpawn = new Vector3( PlayerManager.singleton.playerScores[playerNumber].position.x, PlayerManager.singleton.playerScores[playerNumber].position.y, PlayerManager.singleton.playerScores[playerNumber].position.z);
+        GameManager.singleton.eulerAnglesToSet = PlayerManager.singleton.playerScores[playerNumber].localEulerAngles;
+        if (GameManager.singleton.eulerAnglesToSet == Vector3.zero)
         {
-            lastColorPicked = Instantiate(GameManager.singleton.lastColorPicked, mainCanvas.transform).GetComponent<RectTransform>();
+            GameManager.singleton.positionToSpawn = new Vector3(GameManager.singleton.positionToSpawn.x, GameManager.singleton.positionToSpawn.y + 100, GameManager.singleton.positionToSpawn.z);
         }
-        if (lastColorPicked == null)
+        if (GameManager.singleton.eulerAnglesToSet.z == 180)
         {
-            SetColorBlack();
+            GameManager.singleton.positionToSpawn = new Vector3(GameManager.singleton.positionToSpawn.x, GameManager.singleton.positionToSpawn.y - 100, GameManager.singleton.positionToSpawn.z);
         }
     }
 }
