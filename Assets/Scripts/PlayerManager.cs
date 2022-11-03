@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -40,6 +41,17 @@ public class PlayerManager : MonoBehaviour
             SpawnPlayerScore(playerScores[i]);
             SpawnPlayer(playerScores[i]);
         }
+
+    }
+
+    public void LoadMenuScene()
+    {
+        Contour.singleton.gameboard.GetComponent<DrawerController>().ShowDrawers(); Application.Quit();
+        foreach (DDOL ddol in FindObjectsOfType<DDOL>())
+        {
+            Destroy(ddol.gameObject);
+        }
+        SceneManager.LoadScene(0);
     }
 
     private void SpawnPlayerScore(Transform trnsfrm)

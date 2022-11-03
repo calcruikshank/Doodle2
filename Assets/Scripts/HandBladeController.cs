@@ -26,7 +26,8 @@ namespace Gameboard.Examples
             }
         }
 
-        UserPresenceSceneObject lastUser;
+        UserPresenceSceneObject lastUser = new UserPresenceSceneObject();
+
         void BoardObjectsUpdated(object origin, List<TrackedBoardObject> newBoardObjectList)
         {
             lock (trackingBoardObjects)

@@ -51,10 +51,12 @@ public class WordList : MonoBehaviour
         StartCoroutine(LoadWords());
     }
 
+
     IEnumerator LoadWords()
     {
         while (hardWords.Count == 0 || easyWords.Count == 0 || mediumWords.Count == 0)
         {
+            Debug.LogError("CHANGING WORD !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!____________________________________hardWords.Count == 0");
             yield return null;
         }
         if (UIManager.singleton != null)
@@ -62,7 +64,7 @@ public class WordList : MonoBehaviour
             if (UIManager.singleton.difficulty == 0)
             {
                 Debug.Log("easy");
-                int randomIndex = Random.Range(0, hardWords.Count);
+                int randomIndex = Random.Range(0, easyWords.Count);
                 currentWord = easyWords[randomIndex];
 
                 easyWords.Remove(hardWords[randomIndex]);
@@ -70,7 +72,7 @@ public class WordList : MonoBehaviour
             else if (UIManager.singleton.difficulty == 1)
             {
                 Debug.Log("medium");
-                int randomIndex = Random.Range(0, hardWords.Count);
+                int randomIndex = Random.Range(0, mediumWords.Count);
                 currentWord = mediumWords[randomIndex];
 
                 mediumWords.Remove(hardWords[randomIndex]);
@@ -85,7 +87,7 @@ public class WordList : MonoBehaviour
         }
         else
         {
-            Debug.Log("null");
+            Debug.LogError("(UIManager.singleton = nullnull");
             int randomIndex = Random.Range(0, hardWords.Count);
             currentWord = hardWords[randomIndex];
 

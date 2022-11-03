@@ -224,14 +224,3 @@ cobbler
 fruit cake
 melons
 pineapple
-
-
-
-
-
-
-
-
-
-
-

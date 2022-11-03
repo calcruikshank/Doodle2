@@ -8,6 +8,7 @@ namespace Gameboard
     public class UserPresence : MonoBehaviour
     {
         public static UserPresence instance;
+        Gameboard gameboard;
         public UserPresenceController userPresenceController;
         public GameObject gameboardObject;
         [SerializeField] public List<Transform> playerSpawnLocations;
@@ -21,6 +22,8 @@ namespace Gameboard
                 Destroy(this);
             }
             instance = this;
+            gameboard = FindObjectOfType<Gameboard>();
+            userPresenceController = gameboard.GetComponent<UserPresenceController>();
             DontDestroyOnLoad(this);
             userPresenceController.OnUserPresence += OnUserPresence;
             //  Gameboard.singleton.companionController.SetDrawersHidden();
@@ -77,7 +80,6 @@ namespace Gameboard
                     if (!playersInScene.ContainsKey(userID))
                     {
                         playersInScene.Add(userID, playerSpawnLocations[0]);
-                        Debug.LogError(userPresence.boardUserPosition + "bottom right");
                         //bottom right
                     }
                 }
@@ -86,7 +88,6 @@ namespace Gameboard
                     if (!playersInScene.ContainsKey(userID))
                         playersInScene.Add(userID, playerSpawnLocations[1]);
 
-                    Debug.LogError(userPresence.boardUserPosition + " bottom left ");
                     //bottom left
                 }
                 if (userPresence.boardUserPosition.x == 0 && userPresence.boardUserPosition.y == .75f)
@@ -101,7 +102,6 @@ namespace Gameboard
                     if (!playersInScene.ContainsKey(userID))
                         playersInScene.Add(userID, playerSpawnLocations[3]);
 
-                    Debug.LogError(userPresence.boardUserPosition + " Left top ");
                     //Left top
                 }
                 if (userPresence.boardUserPosition.x == .25 && userPresence.boardUserPosition.y == 0)
@@ -109,7 +109,6 @@ namespace Gameboard
                     if (!playersInScene.ContainsKey(userID))
                         playersInScene.Add(userID, playerSpawnLocations[4]);
 
-                    Debug.LogError(userPresence.boardUserPosition + " p left");
                     //top left
                 }
                 if (userPresence.boardUserPosition.x == .75f && userPresence.boardUserPosition.y == 0)
@@ -117,7 +116,6 @@ namespace Gameboard
                     if (!playersInScene.ContainsKey(userID))
                         playersInScene.Add(userID, playerSpawnLocations[5]);
 
-                    Debug.LogError(userPresence.boardUserPosition + "op right ");
                     //top right
                 }
                 if (userPresence.boardUserPosition.x == 1 && userPresence.boardUserPosition.y == .25)
@@ -125,7 +123,6 @@ namespace Gameboard
                     if (!playersInScene.ContainsKey(userID))
                         playersInScene.Add(userID, playerSpawnLocations[6]);
 
-                    Debug.LogError(userPresence.boardUserPosition + " right top ");
                     //right top
                 }
                 if (userPresence.boardUserPosition.x == 1 && userPresence.boardUserPosition.y == .75f)
@@ -133,7 +130,6 @@ namespace Gameboard
                     if (!playersInScene.ContainsKey(userID))
                         playersInScene.Add(userID, playerSpawnLocations[7]);
 
-                    Debug.LogError(userPresence.boardUserPosition + "/right bottom");
                     //right bottom
                 }
 

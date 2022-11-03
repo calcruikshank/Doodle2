@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -13,10 +14,12 @@ public class UIManager : MonoBehaviour
 
     public static UIManager singleton;
 
+
+    [SerializeField] List<Sprite> buttons;
     public WordList wordList;
     private void Awake()
     {
-        difficulty = 2;
+        difficulty = 1;
         if (singleton != null)
         {
             Destroy(this);
@@ -47,6 +50,8 @@ public class UIManager : MonoBehaviour
     {
         if (difficulty >= 2)
         {
+            difficulty = 0;
+            SetDifficultyText();
             return;
         }
         difficulty++;
@@ -67,6 +72,7 @@ public class UIManager : MonoBehaviour
 
     void SetDifficultyText()
     {
+        difficultyText.transform.parent.GetComponent<Image>().sprite = buttons[difficulty];
         if (difficulty == 0)
         {
             difficultyText.text = "EASY";

@@ -1,3 +1,4 @@
+using Gameboard.Examples;
 using Gameboard.Utilities;
 using Hydra.HydraCommon.Utils.Comparers;
 using System;
@@ -63,11 +64,20 @@ namespace Gameboard
                 GameManager.singleton.lastSortingOrder++;
             }
         }
+        [SerializeField] LayerMask rayMask;
         private void BoardObjectsUpdated(object sender, List<TrackedBoardObject> updatedList)
         {
-
+           
             foreach (TrackedBoardObject newBoardObject in updatedList)
             {
+                Collider2D hit = Physics2D.OverlapPoint(newBoardObject.sceneWorldPosition, rayMask);
+                if (hit != null)
+                {
+                    if (hit.GetComponent<UserPresenceSceneObject>())
+                    {
+                        return;
+                    }
+                }
                 if (newBoardObject.gameboardScreenPosition.x == 0 && newBoardObject.gameboardScreenPosition.y == 0)
                 {
                     continue;

@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
         eulerAnglesToSet = topRotation;
         mainCanvas = FindObjectOfType<Canvas>();
         SetColorBlack();
-        EndTurn();
+        GameManager.singleton.EndTurn();
     }
 
     // Update is called once per frame
