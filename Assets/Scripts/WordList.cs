@@ -67,7 +67,7 @@ public class WordList : MonoBehaviour
                 int randomIndex = Random.Range(0, easyWords.Count);
                 currentWord = easyWords[randomIndex];
 
-                easyWords.Remove(hardWords[randomIndex]);
+                easyWords.Remove(easyWords[randomIndex]);
             }
             else if (UIManager.singleton.difficulty == 1)
             {
@@ -75,7 +75,7 @@ public class WordList : MonoBehaviour
                 int randomIndex = Random.Range(0, mediumWords.Count);
                 currentWord = mediumWords[randomIndex];
 
-                mediumWords.Remove(hardWords[randomIndex]);
+                mediumWords.Remove(mediumWords[randomIndex]);
             }
             else if (UIManager.singleton.difficulty == 2)
             {
