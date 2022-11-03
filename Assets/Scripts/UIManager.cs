@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
     {
         wordList = this.GetComponent<WordList>();
         DontDestroyOnLoad(this);
-        LoadGameScene();
+        //LoadGameScene();
         ChangeWord();
     }
 

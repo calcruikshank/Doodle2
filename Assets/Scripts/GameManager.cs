@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform purpleUI;
     [SerializeField] Transform pinkUI;
     [SerializeField] Transform grayUI;
+    [SerializeField] Transform whiteUI;
 
 
     public Vector3 positionToSpawn;
@@ -278,7 +279,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(GameManager.singleton.lastColorPicked.gameObject);
         }
-        GameManager.singleton.lastColorPicked = Instantiate(blackUI, mainCanvas.transform).GetComponent<RectTransform>();
+        GameManager.singleton.lastColorPicked = Instantiate(whiteUI, mainCanvas.transform).GetComponent<RectTransform>();
         GameManager.singleton.lastColorPicked.position = GameManager.singleton.positionToSpawn;
         GameManager.singleton.lastColorPicked.localEulerAngles = GameManager.singleton.eulerAnglesToSet;
     }
@@ -293,7 +294,7 @@ public class GameManager : MonoBehaviour
         SetColorBlack();
     }
 
-    public int playerTurn;
+    public int playerTurn = 0;
     public void EndTurn()
     {
         SetPlayerTurn(GameManager.singleton.playerTurn);

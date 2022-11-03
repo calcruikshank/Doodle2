@@ -24,6 +24,7 @@ namespace Gameboard
         GUIStyle textStyle = new GUIStyle();
         IEnumerator Start()
         {
+            gameboard = FindObjectOfType<Gameboard>();
             while (gameboard.boardTouchController == null || gameboard.boardTouchController.boardTouchHandler == null)
             {
                 yield return new WaitForEndOfFrame();

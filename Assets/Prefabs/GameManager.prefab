@@ -50,6 +50,7 @@ MonoBehaviour:
   clearScreenMesh: {fileID: 0}
   lineColor: {r: 0, g: 0, b: 0, a: 0}
   positionToSpawnUI: {x: 0, y: 0, z: 0}
+  mainCanvas: {fileID: 0}
   redUI: {fileID: 6271035281573743828, guid: 2b9afec4d422ae0419000351c63dd33d, type: 3}
   blackUI: {fileID: 6271035281573743828, guid: 83766b5da21899a49abcc2ab8d70b61c, type: 3}
   brownUI: {fileID: 6271035281573743828, guid: 92fe2b845efafd84484031d8a60b4f7a, type: 3}
@@ -61,5 +62,11 @@ MonoBehaviour:
   purpleUI: {fileID: 6271035281573743828, guid: 00ffb3a850e73074d9fe117db6d7369c, type: 3}
   pinkUI: {fileID: 6271035281573743828, guid: 4a54cb2e5b6631c46bf559a962e693b9, type: 3}
   grayUI: {fileID: 6271035281573743828, guid: 5076de4e925a5464e90cfe0cc5bf7fab, type: 3}
+  whiteUI: {fileID: 6271035281573743828, guid: a07c616b5304e1d4f8be6ac59c7638ed, type: 3}
   positionToSpawn: {x: 0, y: 0, z: 0}
   positionToSpawn2: {x: 0, y: 0, z: 0}
+  playersInScene: []
+  clearUIMesh: {fileID: 0}
+  playerTurn: 0
+  promptTextPrefab: {fileID: 0}
+  newPrompt: {fileID: 0}

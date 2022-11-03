@@ -389,7 +389,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7082747492346683501, guid: d8bc34d514037b14a8cace6ab0112e33, type: 3}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: SetColorWhite
+        m_MethodName: SetColorGray
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

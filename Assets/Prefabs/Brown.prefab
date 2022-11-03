@@ -389,7 +389,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7082747492346683501, guid: d8bc34d514037b14a8cace6ab0112e33, type: 3}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: SetColorWhite
+        m_MethodName: SetColorGray
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2044,8 +2044,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8106354599824693671, guid: 3ef8f222ebfffb84885675bac3a7dc90, type: 3}
+      propertyPath: m_TargetGraphic
+      value: 
+      objectReference: {fileID: 680355475498731395}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ef8f222ebfffb84885675bac3a7dc90, type: 3}
+--- !u!114 &680355475498731395 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2738802225006995559, guid: 3ef8f222ebfffb84885675bac3a7dc90, type: 3}
+  m_PrefabInstance: {fileID: 3419135570617528292}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &3843145734815417269 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1884383712602516561, guid: 3ef8f222ebfffb84885675bac3a7dc90, type: 3}

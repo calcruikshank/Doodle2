@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] Transform playerPrefab;
     Transform instantiatedPlayer;
 
-    [SerializeField] public List<Transform> playerScores;
+    public List<Transform> playerScores;
     [SerializeField] Transform playerHud;
 
     public List<Transform> playersInstantiated = new List<Transform>();
@@ -29,7 +29,13 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < 8; i++)
+        playerScores = new List<Transform>();
+        foreach (KeyValuePair<string, Transform> kvp in UserPresence.instance.playersInScene)
+        {
+            Debug.LogError(UserPresence.instance.playersInScene.Count + " @@@@@@@@@@@@@@@@@@@@@@@@@@ "  + kvp.Key);
+            playerScores.Add(kvp.Value);
+        }
+        for (int i = 0; i < playerScores.Count; i++)
         {
             SpawnPlayerScore(playerScores[i]);
             SpawnPlayer(playerScores[i]);
@@ -42,6 +48,7 @@ public class PlayerManager : MonoBehaviour
         instantiatedScore.transform.position = trnsfrm.position;
         instantiatedScore.transform.rotation = trnsfrm.rotation;
         playersInstantiated.Add(instantiatedScore);
+        Debug.LogError(playersInstantiated.Count + " players in scene");
     }
 
     // Update is called once per frame
