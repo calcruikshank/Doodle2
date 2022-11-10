@@ -28,6 +28,7 @@ public class PlayerManager : MonoBehaviour
         singleton = this;
     }
     // Start is called before the first frame update
+    bool drawersShown = false;
     void Start()
     {
         playerScores = new List<Transform>();
@@ -41,17 +42,16 @@ public class PlayerManager : MonoBehaviour
             SpawnPlayerScore(playerScores[i]);
             SpawnPlayer(playerScores[i]);
         }
+        drawersShown = true;
 
     }
-
     public void LoadMenuScene()
     {
-        Contour.singleton.gameboard.GetComponent<DrawerController>().ShowDrawers(); Application.Quit();
-        foreach (DDOL ddol in FindObjectsOfType<DDOL>())
-        {
-            Destroy(ddol.gameObject);
-        }
-        SceneManager.LoadScene(0);
+        Contour.singleton.gameboard.GetComponent<DrawerController>().SetDrawerVisibility(!drawersShown);
+        drawersShown = !drawersShown;
+        
+        
+        //Application.Quit();
     }
 
     private void SpawnPlayerScore(Transform trnsfrm)

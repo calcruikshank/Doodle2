@@ -15,6 +15,7 @@ namespace Gameboard
         public Dictionary<string, Transform> playersInScene = new Dictionary<string, Transform>();
         List<Transform> orderedList = new List<Transform>();
 
+        EngagementController engagementController;
         private void Awake()
         {
             if (instance != null)
@@ -26,6 +27,7 @@ namespace Gameboard
             userPresenceController = gameboard.GetComponent<UserPresenceController>();
             DontDestroyOnLoad(this);
             userPresenceController.OnUserPresence += OnUserPresence;
+            engagementController = gameboard.GetComponent<EngagementController>();
             //  Gameboard.singleton.companionController.SetDrawersHidden();
 
 

@@ -23,6 +23,8 @@ namespace Gameboard
 
         float averageDistanceOfPoints;
         GUIStyle textStyle = new GUIStyle();
+        EngagementController engagementController;
+        UserPresenceController userPresenceController;
         IEnumerator Start()
         {
             gameboard = FindObjectOfType<Gameboard>();
@@ -38,7 +40,16 @@ namespace Gameboard
             singleton = this;
             textStyle.normal.textColor = Color.black;
             gameboard.GetComponent<DrawerController>().HideDrawers();
+            engagementController = gameboard.GetComponent<EngagementController>();
+            engagementController.SendUserIdsInSession(new List<string>(userPresenceController.Users.Keys));
+            engagementController.SendGameSessionStarted(new List<string>(userPresenceController.Users.Keys));
         }
+
+        internal void EndGame()
+        {
+            engagementController.SendGameSessionEnded(new List<string>(userPresenceController.Users.Keys));
+        }
+
         float lastreadout;
         void OnGUI()
         {
