@@ -47,6 +47,7 @@ namespace Gameboard.Examples
                                 {
                                     lastUser = hit.GetComponent<UserPresenceSceneObject>();
                                     lastUser.ShowPrompt();
+                                    Timer.singleton.StartTimer();
                                 }
                             }
 

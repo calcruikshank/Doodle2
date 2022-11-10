@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     public Vector3 positionToSpawn2 = new Vector3();
 
 
-    Vector3 eulerAnglesToSet;
+   public  Vector3 eulerAnglesToSet;
     Transform lastColorPicked;
     public List<PlayerPresenceDrawer> playersInScene;
     // Start is called before the first frame update
