@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] List<Sprite> buttons;
     public WordList wordList;
+
+    List<int> possibleTimes =new List<int>();
     private void Awake()
     {
         difficulty = 1;
@@ -34,6 +36,11 @@ public class UIManager : MonoBehaviour
         DontDestroyOnLoad(this);
         //LoadGameScene();
         ChangeWord();
+        possibleTimes.Add(0);
+        possibleTimes.Add(60);
+        possibleTimes.Add(120);
+        timee = possibleTimes[1];
+        timerText.text = ("timer " + timee.ToString());
     }
 
     // Update is called once per frame
@@ -90,5 +97,21 @@ public class UIManager : MonoBehaviour
     {
         wordList.ChangePrompt();
     }
+
+    public int timee = 60;
+    [SerializeField] TextMeshProUGUI timerText;
+    int timeIndex = 1;
+    public void ChangeTime()
+    {
+        timeIndex++;
+        if (timeIndex == 3)
+        {
+            timeIndex = 0;
+        }
+        timee = possibleTimes[timeIndex];
+        timerText.text = ("timer " + timee.ToString());
+        Debug.Log(timee);
+    }
+
 
 }

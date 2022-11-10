@@ -34,7 +34,6 @@ public class PlayerManager : MonoBehaviour
         playerScores = new List<Transform>();
         foreach (KeyValuePair<string, Transform> kvp in UserPresence.instance.playersInScene)
         {
-            Debug.LogError(UserPresence.instance.playersInScene.Count + " @@@@@@@@@@@@@@@@@@@@@@@@@@ "  + kvp.Key);
             playerScores.Add(kvp.Value);
         }
         for (int i = 0; i < playerScores.Count; i++)
@@ -96,6 +95,8 @@ public class PlayerManager : MonoBehaviour
 
     public void StartPlayerTurn(int playerNumber)
     {
+        Debug.Log(GameManager.singleton.positionToSpawn + " Position to spawn ");
+        Timer.singleton.SetTimer(UIManager.singleton.timee, GameManager.singleton.positionToSpawn);
         UIManager.singleton.ChangeWord();
         foreach (Transform pl in playersInstantiated)
         {
