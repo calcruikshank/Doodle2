@@ -25,13 +25,15 @@ MonoBehaviour:
     m_Scopes: []
     m_IsDefault: 1
     m_Capabilities: 7
-  - m_Id: scoped:LastGameboard
+    m_ConfigSource: 0
+  - m_Id: scoped:project:LastGameboard
     m_Name: LastGameboard
     m_Url: https://lastgameboard.jfrog.io/artifactory/api/npm/unity-plugin
     m_Scopes:
     - com.lastgameboard.unity
     m_IsDefault: 0
     m_Capabilities: 0
+    m_ConfigSource: 4
   m_UserSelectedRegistryName: LastGameboard
   m_UserAddingNewScopedRegistry: 0
   m_RegistryInfoDraft:

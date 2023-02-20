@@ -98,3 +98,160 @@ ring
 video
 camera
 snowflake
+Elephant
+Rollercoaster
+Volcano
+Tennis
+Statue
+Bicycle
+Guitar
+Mountain
+Sunglasses
+Jellyfish
+Starfish
+Snowflake
+Dolphin
+Ocean
+Sunflower
+Lion
+Kangaroo
+Giraffe
+Fox
+Owl
+Peacock
+Kangaroo
+Pig
+Fireworks
+Lighthouse
+Rainbow
+House
+Car
+Camera
+Ice cream
+Bridge
+Knight
+King
+Queen
+Crown
+Castle
+Wizard
+Magic
+Dragon
+Mermaid
+Phoenix
+Rocket
+Alien
+Butterfly
+Spider
+Bee
+Snake
+Grasshopper
+Dragonfly
+Caterpillar
+Ant
+Butterfly
+Grass
+Tree
+Forest
+Ladder
+Mountain
+Sunset
+Dolphin
+Hammer
+Mirror
+Kite
+Baseball
+Train
+Tree
+Ocean
+Book
+Chair
+Carrot
+House
+Football
+Apple
+Elephant
+Sunglasses
+Camera
+Hand
+Foot
+Bicycle
+Table
+Cup
+Ice Cream
+Star
+Heart
+Cloud
+Sunflower
+Knife
+Spoon
+Lamp
+Hat 
+Shoe
+Phone
+Pencil
+Car
+Ship
+Bee
+Fish
+Grass
+Sun
+Moon
+Orange
+Key
+Keyboard
+Mouse
+Salary
+Punctuality
+Slacking
+Stress
+Overtime
+Redundant 
+Unemployed
+Disconnect
+Freelance
+Part-time
+Workaholic
+Stressful
+Exhausted 
+Worries
+Career
+Overqualified
+Unhappy
+Panama Canal
+Cheer
+Vacation
+Trick-or-treat 
+Minimalism
+Egghead
+Hypnosis
+Fidget spinner
+Artificial Intelligence
+Scientific research
+Dreamcatcher
+Surprise party
+Chilli cheese dog
+Mugshot
+Moonwalk
+Couch potato
+Aurora Borealis
+Leaning Tower of Pisa
+Fairy
+Steamed Hams 
+Hornets Nest
+Immune System
+Mushroom
+The Sun
+Zebra
+Computer 
+Lawnmower
+Moonwalking
+Oyster crackers
+Striped pajamas
+Shaving cream
+Hiccups
+Breath Mints
+Snot bubbles
+Body odor
+Chicken pox
+Crustacean
